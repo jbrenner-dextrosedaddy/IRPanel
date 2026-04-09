@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IR Panelists – SIR 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #0e7c6b;
+      --accent-light: #e2f4f0;
+      --bg: #eef6fa;
+      --white: #ffffff;
+      --text: #0a2a35;
+      --text-mid: #1e5060;
+      --text-muted: #4a7a8a;
+      --border: #b8dce8;
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(150deg, #ddf0f5 0%, #e8f5ee 50%, #daeaf5 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 4rem;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: linear-gradient(135deg, #0a2f45 0%, #0d4a3a 60%, #0a3850 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 65% 0%, rgba(14,180,140,0.15) 0%, transparent 65%),
+                  radial-gradient(ellipse at 10% 100%, rgba(30,120,180,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #4dd9c0;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: clamp(20px, 4.5vw, 32px);
+      line-height: 1.25;
+      color: #ffffff;
+      max-width: 700px;
+      margin: 0 auto 1.25rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .hero-meta-row svg {
+      width: 13px;
+      height: 13px;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .hero-divider {
+      width: 36px;
+      height: 2px;
+      background: #4dd9c0;
+      border-radius: 2px;
+      margin: 1.5rem auto 0;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      text-align: center;
+      padding: 2rem 1rem 0.75rem;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem 0;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 12px rgba(10, 60, 90, 0.07);
+    }
+
+    .card-photo-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #e8e2d8;
+      flex-shrink: 0;
+    }
+
+    .card-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-photo-wrap img {
+      transform: scale(1.03);
+    }
+
+    .card-body {
+      padding: 1.25rem 1.25rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-role {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .card-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .card-institution {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-mid);
+    }
+
+    .card-training {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .card-hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 1rem;
+    }
+
+    .socials {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      background: var(--bg);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .social-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .social-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: #095c4e;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 0 1rem;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    footer strong {
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 2.25rem 1.25rem 2rem;
+      }
+
+      .hero h1 {
+        font-size: 19px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 0.5rem 1rem 0;
+        gap: 1rem;
+      }
+
+      .card-photo-wrap {
+        aspect-ratio: 3 / 2;
+      }
+
+      .card-name {
+        font-size: 20px;
+      }
+
+      .card-institution {
+        font-size: 14px;
+      }
+
+      .card-training {
+        font-size: 13px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <p class="hero-eyebrow">SIR 2026 &mdash; Panel Session</p>
+    <h1>Untapped Opportunities in IR: Bridging the Gap, Exploring Innovative Engagement, and Providing Tailored Mentorship Solutions</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Tuesday, April 14, 2026
+      </div>
+      <div class="hero-meta-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        9:50 AM – 10:20 AM
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+  </header>
+
+  <p class="section-label">Meet the Panelists</p>
+
+  <div class="grid">
+
+    <!-- Brittany Brookner -->
+    <div class="card">
+      <div class="card-photo-wrap">
+        <img src="images/Brittany_Brookner.png" alt="Brittany Brookner">
+      </div>
+      <div class="card-body">
+        <p class="card-role">Integrated IR Resident</p>
+        <h2 class="card-name">Brittany Brookner</h2>
+        <div class="card-details">
+          <p class="card-institution">University of Pennsylvania</p>
+          <p class="card-training">Georgetown School of Medicine &middot; Carleton College</p>
+        </div>
+        <hr class="card-hr">
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/brittany-brookner-she-her-767833123/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            @brittanyj.b
+          </a>
+          <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @brittanyj_b
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kirema Garcia-Reyes -->
+    <div class="card">
+      <div class="card-photo-wrap">
+        <img src="images/Kirema_Garcia-Reyes.png" alt="Kirema Garcia-Reyes">
+      </div>
+      <div class="card-body">
+        <p class="card-role">Assistant Professor of Diagnostic, Molecular &amp; IR</p>
+        <h2 class="card-name">Kirema Garcia-Reyes</h2>
+        <div class="card-details">
+          <p class="card-institution">Icahn School of Medicine at Mount Sinai</p>
+          <p class="card-training">Georgetown (Undergrad) &middot; Duke (MD) &middot; UCSF (DR Residency, Chief Resident) &middot; Mount Sinai (VIR Fellowship)</p>
+        </div>
+        <hr class="card-hr">
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/kirema-garcia-reyes-md-93166a36/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/kirema1/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            @kirema1
+          </a>
+          <a href="https://x.com/kiremagarciamd" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @kiremagarciamd
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gregg Khodorov -->
+    <div class="card">
+      <div class="card-photo-wrap">
+        <img src="images/Gregg_Khodorov.png" alt="Gregg Khodorov">
+      </div>
+      <div class="card-body">
+        <p class="card-role">Chief Resident, IR</p>
+        <h2 class="card-name">Gregg Khodorov</h2>
+        <div class="card-details">
+          <p class="card-institution">Thomas Jefferson University Hospital</p>
+          <p class="card-training">MD/MBA &middot; IR Mentorship &middot; SIR Leadership</p>
+        </div>
+        <hr class="card-hr">
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/greggkhod/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            @greggkhodorov.md
+          </a>
+          <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @GreggKhodorov
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neil K. Jain -->
+    <div class="card">
+      <div class="card-photo-wrap">
+        <img src="images/Neil_K__Jain.png" alt="Neil K. Jain">
+      </div>
+      <div class="card-body">
+        <p class="card-role">Integrated IR Resident</p>
+        <h2 class="card-name">Neil K. Jain</h2>
+        <div class="card-details">
+          <p class="card-institution">MedStar Georgetown University Hospital</p>
+          <p class="card-training">Rowan University SOM &middot; Boston University</p>
+        </div>
+        <hr class="card-hr">
+        <div class="socials">
+          <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            @neilmanofsteel
+          </a>
+          <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @DigitalAngio
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><strong>Society of Interventional Radiology Annual Scientific Meeting 2026</strong></p>
+    <p>Tuesday, April 14, 2026 &nbsp;&middot;&nbsp; 9:50 – 10:20 AM</p>
+  </footer>
+
+</body>
+</html>
