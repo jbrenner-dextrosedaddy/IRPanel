@@ -36,12 +36,12 @@
 
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
     .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
-    .cf{perspective:1000px;height:580px;}
+    .cf{perspective:1000px;height:650px;}
     .ci{position:relative;width:100%;height:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;}
     .cf.flipped .ci{transform:rotateY(180deg);}
     .cf-front,.cf-back{position:absolute;inset:0;border-radius:var(--r);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--border);box-shadow:0 2px 16px rgba(10,60,30,0.07);}
     .cf-front{background:#ffffff;display:flex;flex-direction:column;}
-    .cpw{width:100%;aspect-ratio:1/1;overflow:hidden;background:#eaf5ee;flex-shrink:0;}
+    .cpw{width:100%;aspect-ratio:4/3;overflow:hidden;background:#eaf5ee;flex-shrink:0;}
     .cpw img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;transition:transform 0.4s;}
     .cf:hover .cpw img{transform:scale(1.03);}
     .cb{padding:1rem 1.1rem 0.9rem;display:flex;flex-direction:column;flex:1;}
@@ -79,7 +79,7 @@
     .footer-left h3 span{color:var(--g2);}
     .footer-left .coming{font-size:13px;color:#9ab8a8;font-style:italic;}
     .footer-right{font-size:12px;color:#9ab8a8;}
-    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}.cf{height:580px;}}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}.cf{height:660px;}}
     @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero h1{font-size:18px;}.grid{grid-template-columns:1fr;padding:0.5rem 1rem 0;gap:1rem;}.cf{height:auto;min-height:520px;}.ci{min-height:520px;}}
   </style>
 </head>
