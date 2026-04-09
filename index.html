@@ -184,7 +184,7 @@
       if(!/^[^@]+@[^@]+\.[^@]+$/.test(email)){alert('Please enter a valid email.');return;}
       const btn=document.querySelector('.sub-btn');btn.textContent='Submitting...';btn.disabled=true;
       try{
-        const res=await fetch('https://api.airtable.com/v0/appiAZADdImMMDYGa/Subscribers',{method:'POST',headers:{'Authorization':'Bearer '+AIRTABLE_KEY,'Content-Type':'application/json'},body:JSON.stringify({fields:{Name:name,Email:email,Role:role,'Submitted At':new Date().toISOString()}})});
+        const res=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,role})});
         if(!res.ok)throw new Error();
         document.getElementById('subForm').style.display='none';
         document.getElementById('subSuccess').style.display='block';
