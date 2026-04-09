@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIR Mentors Panel &mdash; IR.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--g1:#1b5e40;--g2:#2e7d56;--g3:#43a373;--gl:#e8f5ee;--teal:#4dd9c0;--white:#fff;--text:#0d1f16;--mid:#1e4a30;--muted:#5a7a6a;--border:#c8e8d8;--r:16px;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#f8fdfb;color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;padding-bottom:4rem;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .bg-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.1;animation:drift 20s ease-in-out infinite alternate;}
+    .bb1{width:600px;height:600px;background:radial-gradient(circle,#4dd9c0,transparent 70%);top:-120px;left:-100px;animation-duration:22s;}
+    .bb2{width:500px;height:500px;background:radial-gradient(circle,#2e7d56,transparent 70%);bottom:80px;right:-80px;animation-duration:28s;animation-direction:alternate-reverse;}
+    @keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(35px,25px) scale(1.04)}100%{transform:translate(-15px,40px) scale(0.98)}}
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(46,125,86,0.12);box-shadow:0 1px 0 rgba(255,255,255,0.85),0 4px 24px rgba(30,74,48,0.08);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none;white-space:nowrap;letter-spacing:-0.01em;}
+    .nav-logo span{color:var(--g2);}
+    .nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:0.4rem 1rem;border-radius:8px;transition:all 0.15s;white-space:nowrap;display:block;}
+    .nav-links a:hover{color:var(--text);background:rgba(46,125,86,0.07);}
+    .nav-links a.active{color:var(--g2);}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+
+    /* HERO — white */
+    .hero{position:relative;z-index:1;background:#ffffff;text-align:center;padding:3.5rem 1.5rem 3rem;border-bottom:1px solid rgba(46,125,86,0.08);}
+    .hero-eyebrow{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--g2);margin-bottom:1rem;font-weight:500;}
+    .hero h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(20px,4.5vw,34px);line-height:1.25;color:var(--text);max-width:720px;margin:0 auto 1.5rem;}
+    .hero-meta{display:flex;flex-direction:column;align-items:center;gap:8px;}
+    .hero-meta-row{display:inline-flex;align-items:center;gap:9px;font-size:16px;color:var(--text);font-weight:500;}
+    .hero-meta-row svg{width:16px;height:16px;color:var(--g2);flex-shrink:0;}
+    .hero-divider{width:36px;height:2px;background:var(--g2);border-radius:2px;margin:1.75rem auto 0;}
+
+    .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+    .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
+    .cf{perspective:1000px;height:580px;}
+    .ci{position:relative;width:100%;height:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;}
+    .cf.flipped .ci{transform:rotateY(180deg);}
+    .cf-front,.cf-back{position:absolute;inset:0;border-radius:var(--r);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--border);box-shadow:0 2px 16px rgba(10,60,30,0.07);}
+    .cf-front{background:#ffffff;display:flex;flex-direction:column;}
+    .cpw{width:100%;aspect-ratio:1/1;overflow:hidden;background:#eaf5ee;flex-shrink:0;}
+    .cpw img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;transition:transform 0.4s;}
+    .cf:hover .cpw img{transform:scale(1.03);}
+    .cb{padding:1rem 1.1rem 0.9rem;display:flex;flex-direction:column;flex:1;}
+    .cr{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--g2);margin-bottom:4px;}
+    .cn{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--text);line-height:1.15;margin-bottom:10px;}
+    .cd{display:flex;flex-direction:column;gap:4px;margin-bottom:0.75rem;flex:1;}
+    .ci2{font-size:13px;font-weight:500;color:var(--mid);}
+    .ct{display:flex;flex-direction:column;gap:2px;}
+    .ct span{font-size:12px;color:var(--muted);line-height:1.5;display:block;}
+    .chr{border:none;border-top:1px solid var(--border);margin:0 0 0.75rem;}
+    .fh{font-size:11px;color:var(--muted);text-align:center;padding:0.4rem 0 0.1rem;opacity:0.7;}
+    .socials{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;}
+    .sb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:100px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--mid);background:#f4fdf8;transition:all 0.15s;white-space:nowrap;}
+    .sb svg{width:13px;height:13px;flex-shrink:0;}
+    .sb:hover{background:var(--gl);border-color:var(--g2);color:#095c4e;}
+    .sb.linkedin:hover{background:#e8f0fb;border-color:#0a66c2;color:#0a66c2;}
+    .sb.instagram:hover{background:#f0eafc;border-color:#7232bd;color:#7232bd;}
+    .sb.twitter:hover{background:#f0f0f0;border-color:#111;color:#111;}
+    .cf-back{background:linear-gradient(160deg,#0a2f45 0%,#0d4a3a 100%);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;}
+    .bn{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#fff;text-align:center;margin-bottom:0.4rem;}
+    .br{font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;text-align:center;margin-bottom:2rem;}
+    .bs{display:flex;flex-direction:column;gap:12px;width:100%;}
+    .bsb{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;text-decoration:none;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;transition:all 0.2s;}
+    .bsb:hover{background:rgba(255,255,255,0.16);border-color:rgba(255,255,255,0.3);transform:translateX(4px);}
+    .bsb.linkedin:hover{background:rgba(10,102,194,0.3);border-color:#0a66c2;}
+    .bsb.instagram:hover{background:rgba(114,50,189,0.3);border-color:#a855f7;}
+    .bsb svg{width:22px;height:22px;flex-shrink:0;opacity:0.9;}
+    .bsl{display:flex;flex-direction:column;}
+    .bsp{font-size:11px;opacity:0.6;letter-spacing:0.08em;text-transform:uppercase;line-height:1;margin-bottom:2px;}
+    .bsh{font-size:15px;font-weight:500;line-height:1;}
+    .bc{margin-top:1.75rem;font-size:11px;color:rgba(255,255,255,0.35);}
+    footer{position:relative;z-index:1;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);border-top:1px solid rgba(46,125,86,0.1);margin-top:3rem;padding:2.5rem 2.5rem;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .footer-left h3{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:0.3rem;}
+    .footer-left h3 span{color:var(--g2);}
+    .footer-left .coming{font-size:13px;color:#9ab8a8;font-style:italic;}
+    .footer-right{font-size:12px;color:#9ab8a8;}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}.cf{height:580px;}}
+    @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero h1{font-size:18px;}.grid{grid-template-columns:1fr;padding:0.5rem 1rem 0;gap:1rem;}.cf{height:auto;min-height:520px;}.ci{min-height:520px;}}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="bg-blob bb1"></div><div class="bg-blob bb2"></div></div>
+  <nav>
+    <a href="index.html" class="nav-logo">Interventional Radiology<span>.AI</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="panel.html" id="nav-panel">SIR Mentors Panel</a></li>
+      <li><a href="pph.html">Global IR PPH</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <header class="hero">
+    <p class="hero-eyebrow">SIR 2026 &mdash; Panel Session</p>
+    <h1>Untapped Opportunities in IR: Bridging the Gap, Exploring Innovative Engagement, and Providing Tailored Mentorship Solutions</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Tuesday, April 14, 2026</div>
+      <div class="hero-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>9:50 AM &ndash; 10:20 AM</div>
+    </div>
+    <div class="hero-divider"></div>
+  </header>
+
+  <p class="section-label">Meet the Panelists</p>
+  <div class="grid">
+    <div class="cf" onclick="this.classList.toggle('flipped')">
+      <div class="ci">
+        <div class="cf-front">
+          <div class="cpw"><img src="images/Brittany Brookner.png" alt="Brittany Brookner"></div>
+          <div class="cb">
+            <p class="cr">PGY-1 Integrated IR Resident</p>
+            <h2 class="cn">Brittany Brookner, MD</h2>
+            <div class="cd">
+              <p class="ci2">University of Pennsylvania</p>
+              <div class="ct"><span>Georgetown School of Medicine</span><span>Carleton College</span></div>
+            </div>
+            <hr class="chr">
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/brittany-brookner-she-her-767833123/" target="_blank" rel="noopener" class="sb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@brittanyj.b</a>
+              <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@brittanyj_b</a>
+            </div>
+            <p class="fh">tap to see social links &rarr;</p>
+          </div>
+        </div>
+        <div class="cf-back">
+          <p class="bn">Brittany Brookner, MD</p>
+          <p class="br">PGY-1 Integrated IR Resident</p>
+          <div class="bs">
+            <a href="https://www.linkedin.com/in/brittany-brookner-she-her-767833123/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg><div class="bsl"><span class="bsp">LinkedIn</span><span class="bsh">Brittany Brookner</span></div></a>
+            <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@brittanyj.b</span></div></a>
+            <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@brittanyj_b</span></div></a>
+          </div>
+          <p class="bc">tap to flip back</p>
+        </div>
+      </div>
+    </div>
+    <div class="cf" onclick="this.classList.toggle('flipped')">
+      <div class="ci">
+        <div class="cf-front">
+          <div class="cpw"><img src="images/Kirema Garcia-Reyes.png" alt="Kirema Garcia-Reyes"></div>
+          <div class="cb">
+            <p class="cr">Assistant Professor of Diagnostic, Molecular &amp; IR</p>
+            <h2 class="cn">Kirema Garcia-Reyes, MD</h2>
+            <div class="cd">
+              <p class="ci2">Icahn School of Medicine at Mount Sinai</p>
+              <div class="ct"><span>Duke University School of Medicine</span><span>UCSF (DR Residency, Chief Resident)</span><span>Mount Sinai (VIR Fellowship)</span></div>
+            </div>
+            <hr class="chr">
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/kirema-garcia-reyes-md-93166a36/" target="_blank" rel="noopener" class="sb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/kirema1/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@kirema1</a>
+              <a href="https://x.com/kiremagarciamd" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@kiremagarciamd</a>
+            </div>
+            <p class="fh">tap to see social links &rarr;</p>
+          </div>
+        </div>
+        <div class="cf-back">
+          <p class="bn">Kirema Garcia-Reyes, MD</p>
+          <p class="br">Assistant Professor of Diagnostic, Molecular &amp; IR</p>
+          <div class="bs">
+            <a href="https://www.linkedin.com/in/kirema-garcia-reyes-md-93166a36/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg><div class="bsl"><span class="bsp">LinkedIn</span><span class="bsh">Kirema Garcia-Reyes</span></div></a>
+            <a href="https://www.instagram.com/kirema1/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@kirema1</span></div></a>
+            <a href="https://x.com/kiremagarciamd" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@kiremagarciamd</span></div></a>
+          </div>
+          <p class="bc">tap to flip back</p>
+        </div>
+      </div>
+    </div>
+    <div class="cf" onclick="this.classList.toggle('flipped')">
+      <div class="ci">
+        <div class="cf-front">
+          <div class="cpw"><img src="images/Gregg Khodorov.png" alt="Gregg Khodorov"></div>
+          <div class="cb">
+            <p class="cr">PGY-6 Chief Resident, IR</p>
+            <h2 class="cn">Gregg Khodorov, MD, MBA</h2>
+            <div class="cd">
+              <p class="ci2">Thomas Jefferson University Hospital</p>
+              <div class="ct"><span>Rutgers Robert Wood Johnson Medical School</span></div>
+            </div>
+            <hr class="chr">
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/greggkhod/" target="_blank" rel="noopener" class="sb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@greggkhodorov.md</a>
+              <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@GreggKhodorov</a>
+            </div>
+            <p class="fh">tap to see social links &rarr;</p>
+          </div>
+        </div>
+        <div class="cf-back">
+          <p class="bn">Gregg Khodorov, MD, MBA</p>
+          <p class="br">PGY-6 Chief Resident, IR</p>
+          <div class="bs">
+            <a href="https://www.linkedin.com/in/greggkhod/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg><div class="bsl"><span class="bsp">LinkedIn</span><span class="bsh">Gregg Khodorov</span></div></a>
+            <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@greggkhodorov.md</span></div></a>
+            <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@GreggKhodorov</span></div></a>
+          </div>
+          <p class="bc">tap to flip back</p>
+        </div>
+      </div>
+    </div>
+    <div class="cf" onclick="this.classList.toggle('flipped')">
+      <div class="ci">
+        <div class="cf-front">
+          <div class="cpw"><img src="images/Neil K. Jain.png" alt="Neil K. Jain"></div>
+          <div class="cb">
+            <p class="cr">PGY-6 Integrated IR Resident</p>
+            <h2 class="cn">Neil K. Jain, MD</h2>
+            <div class="cd">
+              <p class="ci2">MedStar Georgetown University Hospital</p>
+              <div class="ct"><span>Rowan University School of Osteopathic Medicine</span></div>
+            </div>
+            <hr class="chr">
+            <div class="socials">
+              <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@neilmanofsteel</a>
+              <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@DigitalAngio</a>
+            </div>
+            <p class="fh">tap to see social links &rarr;</p>
+          </div>
+        </div>
+        <div class="cf-back">
+          <p class="bn">Neil K. Jain, MD</p>
+          <p class="br">PGY-6 Integrated IR Resident</p>
+          <div class="bs">
+            <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@neilmanofsteel</span></div></a>
+            <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@DigitalAngio</span></div></a>
+          </div>
+          <p class="bc">tap to flip back</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <h3>Interventional Radiology<span>.AI</span></h3>
+        <p class="coming">More coming soon.</p>
+      </div>
+      <div class="footer-right">&copy; 2026 Interventional Radiology.AI</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('nav-panel').classList.add('active');</script>
+</body>
+</html>
