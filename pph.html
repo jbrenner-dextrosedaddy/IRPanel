@@ -28,17 +28,17 @@
     .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
 
     /* HERO — split */
-    .hero{position:relative;z-index:1;background:#ffffff;padding:4rem 2.5rem 3rem;border-bottom:1px solid rgba(46,125,86,0.08);}
-    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-    .hero h1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(26px,4vw,42px);line-height:1.15;color:var(--text);}
+    .hero{position:relative;z-index:1;background:#ffffff;padding:3rem 2.5rem 2rem;}
+    .hero-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:center;}
+    .hero h1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(26px,4vw,42px);line-height:1.15;color:var(--text);text-align:center;white-space:nowrap;}
     .hero-sub{font-size:16px;color:var(--muted);line-height:1.7;}
     .hero-divider{display:none;}
 
     /* SPLIT */
-    .split{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:3rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;background:#ffffff;}
+    .split{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 1.5rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;background:#ffffff;}
 
     /* LEFT */
-    .why-block{display:flex;flex-direction:column;gap:1rem;}
+    .why-block{display:flex;flex-direction:column;gap:1rem;align-self:start;order:1;}
     .why-label{font-family:'DM Sans',sans-serif;font-size:38px;font-weight:700;color:var(--text);letter-spacing:-0.01em;line-height:1.15;}
     .why-sub{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:500;color:var(--text);line-height:1.4;}
     .why-desc{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--text);line-height:1.75;}
@@ -51,15 +51,15 @@
     .stat-label{font-size:11px;color:var(--muted);line-height:1.4;}
     .maps-block{display:flex;flex-direction:column;gap:1.25rem;}
     .why-desc{font-size:15px;color:var(--text);line-height:1.75;margin-top:0.25rem;}
-    .why-divider{border:none;border-top:1px solid #d0d0d0;margin:0.5rem 0;}
+    .why-para{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--text);line-height:1.75;margin-top:0.75rem;}
     .below-split{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 1.5rem 3rem;background:#ffffff;display:flex;flex-direction:column;gap:1.25rem;}
     .map-card{background:#fff;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 12px rgba(10,60,30,0.07);}
     .map-card img{width:100%;height:auto;display:block;}
     .map-caption{font-size:12px;color:var(--muted);padding:0.6rem 1rem;text-align:center;border-top:1px solid var(--border);font-style:italic;}
 
     /* RIGHT — FORM */
-    .form-card{background:#fff;border-radius:var(--r);border:1px solid var(--border);padding:2.25rem 2rem;box-shadow:0 2px 16px rgba(10,60,30,0.08);position:sticky;top:80px;}
-    .form-card h2{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1.5px solid var(--border);}
+    .form-card{background:#fff;border-radius:var(--r);border:1px solid var(--border);padding:2.25rem 2rem;box-shadow:0 2px 16px rgba(10,60,30,0.08);align-self:start;margin-top:0;order:2;}
+    .form-card h2{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1.5px solid var(--border);margin-top:0;}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0;}
     .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:1.1rem;}
     .form-group label{font-size:11px;font-weight:700;color:var(--mid);letter-spacing:0.09em;text-transform:uppercase;}
@@ -101,24 +101,15 @@
 
   <header class="hero">
     <div class="hero-inner">
-      <h1>Help Us Close the<br>IR Data Gap</h1>
-      <p class="hero-sub">We need your help to change that. Fill out this form below to help us build a more complete global picture.</p>
+      <h1>Help Us Close the IR Data Gap</h1>
     </div>
   </header>
 
-  <div style="background:#ffffff; border-top:1px solid rgba(46,125,86,0.08);">
+  <div style="background:#ffffff;padding-top:0;margin-top:0;">
   <div class="split">
-    <!-- LEFT -->
-    <div class="why-block">
-      <p class="why-label">Why We Need Your Help</p>
-      <p class="why-sub">The data doesn&rsquo;t exist yet. You can help build it.</p>
-      <hr class="why-divider">
-      <p class="why-desc">We are building the first global dataset linking postpartum hemorrhage burden to interventional radiology access. IR workforce data currently exists for only 22 countries&mdash;we need your help to change that.</p>
-    </div>
-
-    <!-- RIGHT: FORM -->
+    <!-- RIGHT: FORM (first in source = top of grid) -->
     <div class="form-card">
-      <h2>Help Close the Global IR Gap</h2>
+      <h2>Why We Need Your Help</h2>
       <div id="formWrap">
         <div class="form-row">
           <div class="form-group"><input type="text" id="firstName" placeholder="First Name" autocomplete="given-name"></div>
@@ -147,6 +138,12 @@
         <h3>Thank you!</h3>
         <p>You&rsquo;re now part of the Global IR PPH network. We&rsquo;ll be in touch as the dataset grows.</p>
       </div>
+    </div>
+
+    <!-- LEFT -->
+    <div class="why-block">
+      <p class="why-sub">The data doesn&rsquo;t exist yet. You can help build it.</p>
+      <p class="why-para">We are building the first global dataset linking postpartum hemorrhage burden to interventional radiology access. IR workforce data currently exists for only 22 countries&mdash;we need your help to change that. Fill out this form below to help us build a more complete global picture.</p>
     </div>
   </div>
 
@@ -186,7 +183,6 @@
 
   <script>
     document.getElementById('nav-pph').classList.add('active');
-    const AIRTABLE_KEY = 'YOUR_AIRTABLE_API_KEY';
     async function handleSubmit() {
       const first = document.getElementById('firstName').value.trim();
       const last = document.getElementById('lastName').value.trim();
@@ -198,11 +194,11 @@
       if(!/^[^@]+@[^@]+\.[^@]+$/.test(email)){alert('Please enter a valid email address.');return;}
       const btn=document.querySelector('.submit-btn');btn.textContent='Submitting...';btn.disabled=true;
       try{
-        const res=await fetch('https://api.airtable.com/v0/appiAZADdImMMDYGa/Global%20IR%20PPH%20Registry',{method:'POST',headers:{'Authorization':'Bearer '+AIRTABLE_KEY,'Content-Type':'application/json'},body:JSON.stringify({fields:{'First Name':first,'Last Name':last,'Email':email,'Country':country,'Institution / Hospital':institution,'Role':role,'Submitted At':new Date().toISOString()}})});
+        const res=await fetch('/api/pph-registry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:first,lastName:last,email,country,institution,role})});
         if(!res.ok)throw new Error();
         document.getElementById('formWrap').style.display='none';
         document.getElementById('successMsg').style.display='block';
-      }catch(e){alert('Something went wrong. Please try again.');btn.textContent='Help Close the Gap \u2192';btn.disabled=false;}
+      }catch(e){alert('Something went wrong. Please try again.');btn.textContent='Help Close the Gap →';btn.disabled=false;}
     }
   </script>
 </body>
