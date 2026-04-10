@@ -56,17 +56,14 @@
     @keyframes cardGlow{0%,100%{box-shadow:0 0 20px rgba(77,217,192,0.3),0 0 40px rgba(46,125,86,0.15),0 4px 16px rgba(0,0,0,0.08)}50%{box-shadow:0 0 30px rgba(77,217,192,0.5),0 0 60px rgba(46,125,86,0.25),0 4px 16px rgba(0,0,0,0.08)}}
     .kirema-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
     .kirema-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
+    .neil-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
+    .neil-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
     .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
-    .cf{perspective:1000px;min-height:380px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
-    .kirema-card{height:520px;}
-    .kirema-card .ci{height:100%;}
-    .kirema-card .cf-front{height:100%;}
-    .kirema-card .cf-back{height:100%;}
-    .neil-card{height:520px;}
-    .neil-card .ci{height:100%;}
-    .neil-card .cf-front{height:100%;}
-    .neil-card .cf-back{height:100%;}
+    .cf{perspective:1000px;height:520px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
+    .cf .ci{height:100%;}
+    .cf .cf-front{height:100%;}
+    .cf .cf-back{height:100%;}
     .ci{position:relative;width:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;display:grid;}
     .cf.flipped .ci{transform:rotateY(180deg);}
     
@@ -83,16 +80,16 @@
     .cf:hover .cpw img{transform:scale(1.03);}
     .cb{padding:0.6rem 1rem 0.75rem;display:flex;flex-direction:column;text-align:center;}
     .cr{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--g2);margin-bottom:4px;text-align:center;}
-    .cn{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--text);line-height:1.15;margin-bottom:6px;}
+    .cn{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--text);line-height:1.15;margin-bottom:8px;}
     .cd{display:flex;flex-direction:column;gap:3px;margin-bottom:0.75rem;}
     .ci2{font-size:13px;font-weight:500;color:var(--mid);text-align:center;}
     .ct{display:flex;flex-direction:column;gap:2px;}
     .ct span{font-size:12px;color:var(--muted);line-height:1.5;display:block;text-align:center;}
     .chr{border:none;border-top:1px solid var(--border);margin:0 0 0.75rem;}
-    .tap-hint{font-size:11px;font-weight:500;color:var(--g2);text-align:center;padding:5px 14px;border:1.5px solid var(--g2);border-radius:100px;display:inline-block;margin-top:0.5rem;letter-spacing:0.02em;cursor:pointer;transition:background 0.15s,color 0.15s;}
+    .tap-hint{font-size:13px;font-weight:600;color:var(--g2);text-align:center;padding:7px 20px;border:2px solid var(--g2);border-radius:100px;display:inline-block;margin-top:0.5rem;letter-spacing:0.02em;cursor:pointer;transition:background 0.15s,color 0.15s;}
     .socials{display:flex;gap:7px;flex-wrap:wrap;padding-top:0.5rem;justify-content:center;}
-    .sb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);color:var(--mid);background:#ffffff;transition:all 0.15s;text-decoration:none;flex-shrink:0;}
-    .sb svg{width:14px;height:14px;flex-shrink:0;}
+    .sb{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);color:var(--mid);background:#ffffff;transition:all 0.15s;text-decoration:none;flex-shrink:0;}
+    .sb svg{width:18px;height:18px;flex-shrink:0;}
     .sb:hover{background:var(--gl);border-color:var(--g2);color:var(--g2);}
     .sb.linkedin:hover{background:#e8f0fb;border-color:#0a66c2;color:#0a66c2;}
     .sb.instagram:hover{background:#f0eafc;border-color:#7232bd;color:#7232bd;}
@@ -242,6 +239,45 @@
         </div>
       </div>
     </div>
+    <div class="cf neil-card" id="neilCard" onclick="handleNeilClick(this)">
+      <div class="ci">
+        <div class="cf-front">
+          <div style="position:relative;">
+          <button id="mackSoundBtn" onclick="event.stopPropagation();toggleMack()" style="position:absolute;top:14px;right:14px;z-index:10;width:44px;height:44px;border-radius:50%;background:#e53e3e;border:2px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.3);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
+            <svg id="mackSoundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
+          <div class="cpw"><img src="images/Neil K. Jain.png" alt="Neil K. Jain"></div>
+          </div>
+          <div class="cb">
+            <p class="cr">PGY-6 Integrated IR Resident</p>
+            <h2 class="cn">Neil K. Jain, MD</h2>
+            <div class="cd">
+              <p class="ci2">MedStar Georgetown University Hospital</p>
+              <div class="ct"><span>Rowan University School of Osteopathic Medicine</span></div>
+            </div>
+                      <div class="socials">
+              <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+              <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            </div>
+            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
+          </div>
+        </div>
+        <div class="cf-back" id="neilBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
+          <video id="neilVideoCard" src="video/MACK.mp4" muted playsinline loop
+            style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
+          </video>
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
+            <p class="bn" style="margin:0;font-size:16px;">Neil K. Jain, MD</p>
+            <div style="display:flex;gap:10px;">
+              <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@neilmanofsteel</a>
+              <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@DigitalAngio</a>
+            </div>
+            <p class="bc" style="margin-top:4px;">tap to flip back</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="cf" onclick="this.classList.toggle('flipped')">
       <div class="ci">
         <div class="cf-front">
@@ -273,40 +309,6 @@
         </div>
       </div>
     </div>
-    <div class="cf neil-card" id="neilCard" onclick="handleNeilClick(this)">
-      <div class="ci">
-        <div class="cf-front">
-          <div class="cpw"><img src="images/Neil K. Jain.png" alt="Neil K. Jain"></div>
-          <div class="cb">
-            <p class="cr">PGY-6 Integrated IR Resident</p>
-            <h2 class="cn">Neil K. Jain, MD</h2>
-            <div class="cd">
-              <p class="ci2">MedStar Georgetown University Hospital</p>
-              <div class="ct"><span>Rowan University School of Osteopathic Medicine</span></div>
-            </div>
-                      <div class="socials">
-              <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
-              <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            </div>
-            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
-          </div>
-        </div>
-        <div class="cf-back" id="neilBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
-          <video id="neilVideoCard" src="video/MACK.mp4" muted playsinline loop
-            style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
-          </video>
-          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
-            <p class="bn" style="margin:0;font-size:16px;">Neil K. Jain, MD</p>
-            <div style="display:flex;gap:10px;">
-              <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@neilmanofsteel</a>
-              <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@DigitalAngio</a>
-            </div>
-            <p class="bc" style="margin-top:4px;">tap to flip back</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer>
     <div class="footer-inner">
@@ -319,6 +321,8 @@
   </footer>
 
   <!-- Bad Bunny audio for Kirema card -->
+  <!-- MACK audio for Neil card -->
+  <audio id="mackAudio" loop preload="auto"><source src="audio/MACK.m4a" type="audio/mp4"></audio>
   <!-- MACK video for Neil card -->
   <video id="neilVideo" src="video/MACK.mp4" muted playsinline loop style="display:none;"></video>
   <audio id="badBunnyAudio" loop preload="auto">
@@ -332,6 +336,33 @@
     const video = document.getElementById('kiremaVideo');
 
     let mediaPlaying = false;
+    let mackPlaying = false;
+    const mackAudio = document.getElementById('mackAudio');
+
+    function toggleMack() {
+      const btn = document.getElementById('mackSoundBtn');
+      const card = document.getElementById('neilCard');
+      const neilVid = document.getElementById('neilVideoCard');
+      if (mackPlaying) {
+        mackAudio.pause();
+        neilVid.pause();
+        mackPlaying = false;
+        btn.style.background = '#e53e3e';
+        btn.style.border = '2px solid rgba(255,255,255,0.6)';
+        btn.style.animation = 'btnPulse 1.2s ease-in-out infinite';
+        document.getElementById('mackSoundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+        card.classList.remove('playing');
+      } else {
+        mackAudio.play().catch(() => {});
+        neilVid.play().catch(() => {});
+        mackPlaying = true;
+        btn.style.background = '#2e7d56';
+        btn.style.border = '2px solid rgba(77,217,192,0.8)';
+        btn.style.animation = 'none';
+        document.getElementById('mackSoundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+        card.classList.add('playing');
+      }
+    }
 
     function toggleAudio() {
       const btn = document.getElementById('soundBtn');
