@@ -56,6 +56,10 @@
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
     .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
     .cf{perspective:1000px;min-height:380px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
+    .kirema-card{height:520px;}
+    .kirema-card .ci{height:100%;}
+    .kirema-card .cf-front{height:100%;}
+    .kirema-card .cf-back{height:100%;}
     .ci{position:relative;width:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;display:grid;}
     .cf.flipped .ci{transform:rotateY(180deg);}
     
@@ -215,11 +219,11 @@
             <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
-        <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);">
+        <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
           <video id="kiremaVideo" src="videos/NUEVAYOL.mp4" muted playsinline loop
-            style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--r);">
+            style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
           </video>
-          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
             <p class="bn" style="margin:0;font-size:16px;">Kirema Garcia-Reyes, MD</p>
             <div style="display:flex;gap:10px;">
               <a href="https://www.linkedin.com/in/kirema-garcia-reyes-md-93166a36/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
