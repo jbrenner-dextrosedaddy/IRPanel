@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nerve Blocks &mdash; IR.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--g1:#1b5e40;--g2:#2e7d56;--g3:#43a373;--gl:#e8f5ee;--teal:#4dd9c0;--white:#fff;--text:#0d1f16;--mid:#1e4a30;--muted:#5a7a6a;--border:#c8e8d8;--r:16px;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#f8fdfb;color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;padding-bottom:4rem;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .bg-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.1;animation:drift 20s ease-in-out infinite alternate;}
+    .bb1{width:600px;height:600px;background:radial-gradient(circle,#4dd9c0,transparent 70%);top:-120px;left:-100px;animation-duration:22s;}
+    .bb2{width:500px;height:500px;background:radial-gradient(circle,#2e7d56,transparent 70%);bottom:80px;right:-80px;animation-duration:28s;animation-direction:alternate-reverse;}
+    @keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(35px,25px) scale(1.04)}100%{transform:translate(-15px,40px) scale(0.98)}}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(46,125,86,0.12);box-shadow:0 1px 0 rgba(255,255,255,0.85),0 4px 24px rgba(30,74,48,0.08);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none;white-space:nowrap;letter-spacing:-0.01em;}
+    .nav-logo span{color:var(--g2);}
+    .nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:0.4rem 1rem;border-radius:8px;transition:all 0.15s;white-space:nowrap;display:block;}
+    .nav-links a:hover{color:var(--text);background:rgba(46,125,86,0.07);}
+    .nav-links a.active{color:var(--g2);}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;background:#ffffff;padding:4rem 2.5rem 2.5rem;border-bottom:1px solid rgba(46,125,86,0.08);}
+    .hero-inner{max-width:1100px;margin:0 auto;}
+    .hero-eyebrow{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--g2);margin-bottom:1rem;font-weight:500;}
+    .hero h1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(32px,5vw,52px);line-height:1.1;color:var(--text);margin-bottom:0.75rem;}
+    .hero-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:2rem;}
+
+    /* QUICK ACCESS PILLS — right under title */
+    .quick-access{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:0;}
+    .qa-card{display:flex;align-items:center;gap:12px;padding:14px 20px;background:#ffffff;border:1.5px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:all 0.18s;box-shadow:0 2px 8px rgba(10,60,30,0.06);}
+    .qa-card:hover{border-color:var(--g2);background:var(--gl);transform:translateY(-2px);box-shadow:0 6px 20px rgba(10,60,30,0.12);}
+    .qa-icon{width:40px;height:40px;border-radius:10px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .qa-icon svg{width:20px;height:20px;color:var(--g2);}
+    .qa-text{}
+    .qa-label{font-size:13px;font-weight:600;color:var(--text);display:block;line-height:1.2;}
+    .qa-desc{font-size:11px;color:var(--muted);display:block;margin-top:2px;}
+    .qa-arrow{margin-left:auto;color:var(--g2);font-size:18px;opacity:0.6;}
+
+    /* CONTENT SECTION */
+    .content{position:relative;z-index:1;max-width:1100px;margin:3rem auto;padding:0 2.5rem;}
+    .section-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+    .resource-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+    .resource-card{background:#ffffff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:0 2px 12px rgba(10,60,30,0.06);transition:transform 0.18s,box-shadow 0.18s;text-decoration:none;display:block;}
+    .resource-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(10,60,30,0.12);}
+    .rc-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:var(--gl);color:var(--g2);margin-bottom:0.75rem;}
+    .rc-title{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+    .rc-desc{font-size:14px;color:var(--muted);line-height:1.65;}
+    .rc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);}
+    .rc-cta{font-size:13px;font-weight:600;color:var(--g2);}
+
+    footer{position:relative;z-index:1;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);border-top:1px solid rgba(46,125,86,0.1);margin-top:2rem;padding:2.5rem;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .footer-left h3{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:0.3rem;}
+    .footer-left h3 span{color:var(--g2);}
+    .footer-left .coming{font-size:13px;color:#9ab8a8;font-style:italic;}
+    .footer-right{font-size:12px;color:#9ab8a8;}
+
+    @media(max-width:720px){.resource-grid{grid-template-columns:1fr;}.quick-access{flex-direction:column;}.hero{padding:2.5rem 1.5rem 2rem;}.content{padding:0 1.5rem;margin:2rem auto;}}
+    @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="bg-blob bb1"></div><div class="bg-blob bb2"></div></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Interventional Radiology<span>.AI</span></a>
+    <ul class="nav-links" id="navLinks"></ul>
+    <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Interventional Radiology</p>
+      <h1>Nerve Blocks</h1>
+      <p class="hero-sub">Resources for IR-guided nerve block procedures — quick reference cards and planning tools.</p>
+
+      <!-- QUICK ACCESS — right under the title -->
+      <div class="quick-access">
+        <a href="#excel" class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 3v18"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <span class="qa-label">Nerve Block Excel</span>
+            <span class="qa-desc">How to use the planning tool</span>
+          </div>
+          <span class="qa-arrow">→</span>
+        </a>
+        <a href="#cards" class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <path d="M2 10h20"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <span class="qa-label">Nerve Block Cards</span>
+            <span class="qa-desc">Quick reference procedure cards</span>
+          </div>
+          <span class="qa-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <p class="section-title">Resources</p>
+    <div class="resource-grid">
+
+      <a href="#excel" id="excel" class="resource-card">
+        <span class="rc-tag">Tool</span>
+        <p class="rc-title">Nerve Block Excel</p>
+        <p class="rc-desc">A step-by-step guide on how to use the nerve block planning spreadsheet — including dosing calculations, patient prep, and procedural checklists for IR-guided nerve blocks.</p>
+        <div class="rc-footer">
+          <span class="rc-cta">How to use &rarr;</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" style="color:var(--g2)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
+      </a>
+
+      <a href="#cards" id="cards" class="resource-card">
+        <span class="rc-tag">Reference</span>
+        <p class="rc-title">Nerve Block Cards</p>
+        <p class="rc-desc">Concise procedure reference cards for common IR-guided nerve blocks — indications, anatomy, technique, medications, and post-procedure care at a glance.</p>
+        <div class="rc-footer">
+          <span class="rc-cta">View cards &rarr;</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" style="color:var(--g2)"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <h3>Interventional Radiology<span>.AI</span></h3>
+        <p class="coming">More coming soon.</p>
+      </div>
+      <div class="footer-right">&copy; 2026 Interventional Radiology.AI</div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
