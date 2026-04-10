@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HCC LDT &mdash; IR.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--g1:#1b5e40;--g2:#2e7d56;--g3:#43a373;--gl:#e8f5ee;--teal:#4dd9c0;--white:#fff;--text:#0d1f16;--mid:#1e4a30;--muted:#5a7a6a;--border:#c8e8d8;--r:16px;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#f8fdfb;color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;padding-bottom:4rem;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .bg-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.1;animation:drift 20s ease-in-out infinite alternate;}
+    .bb1{width:600px;height:600px;background:radial-gradient(circle,#4dd9c0,transparent 70%);top:-120px;left:-100px;animation-duration:22s;}
+    .bb2{width:500px;height:500px;background:radial-gradient(circle,#2e7d56,transparent 70%);bottom:80px;right:-80px;animation-duration:28s;animation-direction:alternate-reverse;}
+    @keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(35px,25px) scale(1.04)}100%{transform:translate(-15px,40px) scale(0.98)}}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(46,125,86,0.12);box-shadow:0 1px 0 rgba(255,255,255,0.85),0 4px 24px rgba(30,74,48,0.08);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none;white-space:nowrap;letter-spacing:-0.01em;}
+    .nav-logo span{color:var(--g2);}
+    .nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:0.4rem 1rem;border-radius:8px;transition:all 0.15s;white-space:nowrap;display:block;}
+    .nav-links a:hover{color:var(--text);background:rgba(46,125,86,0.07);}
+    .nav-links a.active{color:var(--g2);}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;background:#ffffff;padding:4rem 2.5rem 3rem;text-align:center;border-bottom:1px solid rgba(46,125,86,0.08);}
+    .hero-eyebrow{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--g2);margin-bottom:1rem;font-weight:500;}
+    .hero h1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(28px,5vw,48px);line-height:1.1;color:var(--text);margin-bottom:1rem;}
+    .hero-sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 2rem;line-height:1.7;}
+    .hero-divider{width:36px;height:2px;background:var(--g2);border-radius:2px;margin:0 auto;}
+
+    /* COMING SOON */
+    .coming-section{position:relative;z-index:1;background:#ffffff;max-width:800px;margin:4rem auto;padding:3rem 2rem;border-radius:var(--r);border:1px solid var(--border);box-shadow:0 2px 16px rgba(10,60,30,0.07);text-align:center;}
+    .coming-icon{width:72px;height:72px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;}
+    .coming-icon svg{width:36px;height:36px;color:var(--g2);}
+    .coming-section h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:var(--text);margin-bottom:0.75rem;}
+    .coming-section p{font-size:15px;color:var(--muted);line-height:1.7;max-width:520px;margin:0 auto 2rem;}
+    .notify-form{display:flex;flex-direction:column;gap:10px;max-width:400px;margin:0 auto;}
+    .notify-form input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:border-color 0.15s;}
+    .notify-form input:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(46,125,86,0.1);}
+    .notify-form input::placeholder{color:#aac8b8;}
+    .notify-btn{padding:13px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s,transform 0.1s;}
+    .notify-btn:hover{opacity:0.92;transform:translateY(-1px);}
+    .notify-success{display:none;text-align:center;padding:1rem 0;}
+    .notify-success .check{width:48px;height:48px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;}
+    .notify-success .check svg{width:24px;height:24px;color:var(--g2);}
+    .notify-success p{font-size:14px;color:var(--muted);}
+
+    footer{position:relative;z-index:1;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);border-top:1px solid rgba(46,125,86,0.1);margin-top:0;padding:2.5rem 2.5rem;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .footer-left h3{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:0.3rem;}
+    .footer-left h3 span{color:var(--g2);}
+    .footer-left .coming{font-size:13px;color:#9ab8a8;font-style:italic;}
+    .footer-right{font-size:12px;color:#9ab8a8;}
+
+    @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero{padding:3rem 1.5rem 2rem;}.coming-section{margin:2rem 1rem;padding:2rem 1.25rem;}}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="bg-blob bb1"></div><div class="bg-blob bb2"></div></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Interventional Radiology<span>.AI</span></a>
+    <ul class="nav-links" id="navLinks"></ul>
+    <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <header class="hero">
+    <p class="hero-eyebrow">Interventional Radiology</p>
+    <h1>HCC LDT</h1>
+    <p class="hero-sub">Hepatocellular Carcinoma Locoregional &amp; Directed Therapy — a resource for IR providers managing HCC with interventional approaches.</p>
+    <div class="hero-divider"></div>
+  </header>
+
+  <div class="coming-section">
+    <div class="coming-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+    </div>
+    <h2>Coming Soon</h2>
+    <p>We&rsquo;re building a comprehensive HCC LDT resource for interventional radiologists. Enter your email below and we&rsquo;ll notify you when it launches.</p>
+    <div id="notifyForm" class="notify-form">
+      <input type="email" id="notifyEmail" placeholder="your@email.com" autocomplete="email">
+      <button class="notify-btn" onclick="handleNotify()">Notify Me When It&rsquo;s Live &rarr;</button>
+    </div>
+    <div class="notify-success" id="notifySuccess">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <p>You&rsquo;re on the list! We&rsquo;ll be in touch when HCC LDT launches.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <h3>Interventional Radiology<span>.AI</span></h3>
+        <p class="coming">More coming soon.</p>
+      </div>
+      <div class="footer-right">&copy; 2026 Interventional Radiology.AI</div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script>
+    async function handleNotify() {
+      const email = document.getElementById('notifyEmail').value.trim();
+      if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) { alert('Please enter a valid email.'); return; }
+      const btn = document.querySelector('.notify-btn');
+      btn.textContent = 'Submitting...'; btn.disabled = true;
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({name: 'HCC LDT Waitlist', email, role: 'Other'})
+        });
+        if (!res.ok) throw new Error();
+        document.getElementById('notifyForm').style.display = 'none';
+        document.getElementById('notifySuccess').style.display = 'block';
+      } catch(e) {
+        alert('Something went wrong. Please try again.');
+        btn.textContent = "Notify Me When It's Live →"; btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
