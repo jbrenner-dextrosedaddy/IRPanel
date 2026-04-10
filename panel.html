@@ -52,7 +52,10 @@
     .hero-wave svg:nth-child(3){animation-duration:22s;opacity:0.04;}
     @keyframes waveDrift{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(3%,2%) rotate(2deg) scale(1.02)}66%{transform:translate(-2%,3%) rotate(-1deg) scale(0.98)}100%{transform:translate(2%,-2%) rotate(1deg) scale(1.01)}}
     .hero-inner{position:relative;z-index:1;}
-    @keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,0.5)}50%{box-shadow:0 0 0 6px rgba(229,62,62,0)}}
+    @keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,0.5)}50%{box-shadow:0 0 0 8px rgba(229,62,62,0)}}
+    @keyframes cardGlow{0%,100%{box-shadow:0 0 20px rgba(77,217,192,0.3),0 0 40px rgba(46,125,86,0.15),0 4px 16px rgba(0,0,0,0.08)}50%{box-shadow:0 0 30px rgba(77,217,192,0.5),0 0 60px rgba(46,125,86,0.25),0 4px 16px rgba(0,0,0,0.08)}}
+    .kirema-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
+    .kirema-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
     .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
     .cf{perspective:1000px;min-height:380px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
@@ -199,8 +202,8 @@
       <div class="ci">
         <div class="cf-front">
           <div style="position:relative;">
-          <button id="soundBtn" onclick="event.stopPropagation();toggleAudio()" style="position:absolute;top:8px;right:8px;z-index:10;width:34px;height:34px;border-radius:50%;background:#e53e3e;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.25);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
-            <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <button id="soundBtn" onclick="event.stopPropagation();toggleAudio()" style="position:absolute;top:14px;right:14px;z-index:10;width:44px;height:44px;border-radius:50%;background:#e53e3e;border:2px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.3);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
+            <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <div class="cpw"><img src="images/Kirema Garcia-Reyes.png" alt="Kirema Garcia-Reyes"></div>
           </div>
@@ -322,24 +325,27 @@
 
     function toggleAudio() {
       const btn = document.getElementById('soundBtn');
+      const card = document.getElementById('kiremaCard');
       if (mediaPlaying) {
         audio.pause();
         video.pause();
         mediaPlaying = false;
-        // Red + blinking
         btn.style.background = '#e53e3e';
+        btn.style.border = '2px solid rgba(255,255,255,0.6)';
         btn.style.animation = 'btnPulse 1.2s ease-in-out infinite';
         btn.title = 'Play music & video';
         document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+        card.classList.remove('playing');
       } else {
         audio.play().catch(() => {});
         video.play().catch(() => {});
         mediaPlaying = true;
-        // Green + no pulse
         btn.style.background = '#2e7d56';
+        btn.style.border = '2px solid rgba(77,217,192,0.8)';
         btn.style.animation = 'none';
         btn.title = 'Stop music & video';
         document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+        card.classList.add('playing');
       }
     }
 
