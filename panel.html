@@ -122,6 +122,35 @@
     .footer-left .coming{font-size:13px;color:#9ab8a8;font-style:italic;}
     .footer-right{font-size:12px;color:#9ab8a8;}
     
+    /* Paused overlay on video back cards */
+    .paused-overlay{position:absolute;inset:0;z-index:5;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,0.45);backdrop-filter:blur(2px);border-radius:var(--r);}
+    .paused-overlay.visible{display:flex;}
+    .po-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:2px;}
+    .po-btns{display:flex;gap:12px;align-items:center;}
+    .po-btn{display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap;}
+    .po-play{background:var(--g2);color:#fff;box-shadow:0 3px 14px rgba(46,125,86,0.45);}
+    .po-play:hover{background:var(--g1);transform:scale(1.04);}
+    .po-flip{background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.35);}
+    .po-flip:hover{background:rgba(255,255,255,0.28);transform:scale(1.04);}
+    .tutorial-bubble{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:#fff;border:2px solid var(--g2);border-radius:14px;padding:10px 14px;box-shadow:0 4px 20px rgba(10,60,30,0.18);min-width:190px;text-align:center;animation:tutPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes tutPop{from{opacity:0;transform:translateX(-50%) scale(0.8)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+    .tutorial-bubble.hide{animation:tutFade 0.25s ease forwards;}
+    @keyframes tutFade{to{opacity:0;transform:translateX(-50%) scale(0.9)}}
+    .tut-text{font-size:12px;font-weight:600;color:var(--g2);line-height:1.4;margin-bottom:7px;}
+    .tut-arrows{font-size:18px;margin-bottom:4px;}
+    .tut-skip{font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
+    .tut-skip:hover{color:var(--g2);}
+    .tut-arrow-down{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--g2);}
+    .tut-arrow-down::after{content:'';position:absolute;top:-9px;left:-7px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid #fff;}
+    /* Page legend */
+    .page-legend{position:relative;z-index:1;max-width:1100px;margin:0 auto 2rem;padding:0 1.25rem;}
+    .legend-box{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+    .legend-title{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+    .legend-items{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;}
+    .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text);}
+    .legend-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .legend-icon.sound{background:#e53e3e;border:2px solid rgba(255,255,255,0.6);box-shadow:0 2px 8px rgba(229,62,62,0.4);}
+    .legend-icon.flip{background:var(--gl);border:2px solid var(--g2);}
     @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:1.5rem;}.hero{padding:2rem 1.5rem;}}@media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero h1{font-size:18px;}.grid{grid-template-columns:1fr;padding:0.5rem 1rem 0;gap:1rem;}.cf{height:auto;min-height:520px;}.ci{min-height:520px;}}
   </style>
 </head>
@@ -164,10 +193,39 @@
   </header>
 
   <p class="section-label">Meet the Panelists</p>
+
+  <!-- Legend / key -->
+  <div class="page-legend">
+    <div class="legend-box">
+      <span class="legend-title">How it works:</span>
+      <div class="legend-items">
+        <div class="legend-item">
+          <div class="legend-icon flip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g2)" stroke-width="2" width="16" height="16"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          </div>
+          <span><strong>Tap any card</strong> to flip it &amp; see social links</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-icon sound">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </div>
+          <span><strong>Red button</strong> = play that panelist's theme song 🎵</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="grid">
-    <div class="cf brittany-card" id="brittanyCard" onclick="this.classList.toggle('flipped')">
+    <div class="cf brittany-card" id="brittanyCard" onclick="handleGenericClick(this)">
       <div class="ci">
-        <div class="cf-front">
+        <div class="cf-front" style="position:relative;">
+          <!-- Tutorial bubble -->
+          <div class="tutorial-bubble" id="tutBubble">
+            <div class="tut-arrows">👆</div>
+            <div class="tut-text">Tap card to flip &amp; connect!<br><span style="font-weight:400;color:var(--muted);">🔴 Red button = play music</span></div>
+            <button class="tut-skip" onclick="event.stopPropagation();dismissTutorial()">skip tutorial ✕</button>
+            <div class="tut-arrow-down"></div>
+          </div>
           <div class="cpw"><img src="images/Brittany Brookner.png" alt="Brittany Brookner"></div>
           <div class="cb">
             <p class="cr">PGY-1 Integrated IR Resident</p>
@@ -224,6 +282,18 @@
           <video id="kiremaVideo" src="video/NUEVAYOL.mp4" playsinline loop
             style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
           </video>
+          <!-- Paused overlay -->
+          <div class="paused-overlay" id="kiremaPausedOverlay">
+            <p class="po-label">Paused</p>
+            <div class="po-btns">
+              <button class="po-btn po-play" onclick="event.stopPropagation();startPlaying('kirema')">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,3 19,12 5,21"/></svg> Resume
+              </button>
+              <button class="po-btn po-flip" onclick="event.stopPropagation();flipBack('kiremaCard','kiremaPausedOverlay')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> Flip back
+              </button>
+            </div>
+          </div>
           <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
             <p class="bn" style="margin:0;font-size:16px;">Kirema Garcia-Reyes, MD</p>
             <div style="display:flex;gap:10px;">
@@ -263,6 +333,18 @@
           <video id="neilVideoCard" src="video/MACK.mp4" playsinline loop
             style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
           </video>
+          <!-- Paused overlay -->
+          <div class="paused-overlay" id="neilPausedOverlay">
+            <p class="po-label">Paused</p>
+            <div class="po-btns">
+              <button class="po-btn po-play" onclick="event.stopPropagation();startPlaying('neil')">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,3 19,12 5,21"/></svg> Resume
+              </button>
+              <button class="po-btn po-flip" onclick="event.stopPropagation();flipBack('neilCard','neilPausedOverlay')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> Flip back
+              </button>
+            </div>
+          </div>
           <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
             <p class="bn" style="margin:0;font-size:16px;">Neil K. Jain, MD</p>
             <div style="display:flex;gap:10px;">
@@ -274,10 +356,15 @@
         </div>
       </div>
     </div>
-    <div class="cf gregg-card" id="greggCard" onclick="this.classList.toggle('flipped')">
+    <div class="cf gregg-card" id="greggCard" onclick="handleGreggClick(this)">
       <div class="ci">
         <div class="cf-front">
+          <div style="position:relative;">
+          <button id="greggSoundBtn" onclick="event.stopPropagation();toggleGregg()" style="position:absolute;top:14px;right:14px;z-index:10;width:44px;height:44px;border-radius:50%;background:#e53e3e;border:2px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.3);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
+            <svg id="greggSoundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
           <div class="cpw"><img src="images/Gregg Khodorov.png" alt="Gregg Khodorov"></div>
+          </div>
           <div class="cb">
             <p class="cr">PGY-6 Chief Resident, IR</p>
             <h2 class="cn">Gregg Khodorov, MD, MBA</h2>
@@ -293,15 +380,31 @@
             <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
-        <div class="cf-back">
-          <p class="bn">Gregg Khodorov, MD, MBA</p>
-          <p class="br">PGY-6 Chief Resident, IR</p>
-          <div class="bs">
-            <a href="https://www.linkedin.com/in/greggkhod/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg><div class="bsl"><span class="bsp">LinkedIn</span><span class="bsh">Gregg Khodorov</span></div></a>
-            <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@greggkhodorov.md</span></div></a>
-            <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@GreggKhodorov</span></div></a>
+        <div class="cf-back" id="greggBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
+          <video id="greggVideo" src="video/SHINE.mp4" playsinline loop
+            style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
+          </video>
+          <!-- Paused overlay -->
+          <div class="paused-overlay" id="greggPausedOverlay">
+            <p class="po-label">Paused</p>
+            <div class="po-btns">
+              <button class="po-btn po-play" onclick="event.stopPropagation();startPlaying('gregg')">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,3 19,12 5,21"/></svg> Resume
+              </button>
+              <button class="po-btn po-flip" onclick="event.stopPropagation();flipBack('greggCard','greggPausedOverlay')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> Flip back
+              </button>
+            </div>
           </div>
-          <p class="bc">tap to flip back</p>
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
+            <p class="bn" style="margin:0;font-size:16px;">Gregg Khodorov, MD, MBA</p>
+            <div style="display:flex;gap:10px;">
+              <a href="https://www.linkedin.com/in/greggkhod/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@greggkhodorov.md</a>
+              <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@GreggKhodorov</a>
+            </div>
+            <p class="bc" style="margin-top:4px;">tap to flip back</p>
+          </div>
         </div>
       </div>
     </div>
@@ -321,75 +424,135 @@
 
   <script>
 
-    const video = document.getElementById('kiremaVideo');
+    // Map of which card/overlay/btn each track uses
+    const TRACKS = {
+      kirema: { vid: ()=>document.getElementById('kiremaVideo'), card: 'kiremaCard', overlay: 'kiremaPausedOverlay', btn: 'soundBtn', icon: 'soundIcon' },
+      neil:   { vid: ()=>document.getElementById('neilVideoCard'), card: 'neilCard', overlay: 'neilPausedOverlay', btn: 'mackSoundBtn', icon: 'mackSoundIcon' },
+      gregg:  { vid: ()=>document.getElementById('greggVideo'), card: 'greggCard', overlay: 'greggPausedOverlay', btn: 'greggSoundBtn', icon: 'greggSoundIcon' },
+    };
 
-    const neilVid = document.getElementById('neilVideoCard');
-    const SPEAKER = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
-    let nowPlaying = null; // null | 'kirema' | 'neil'
+    let nowPlaying = null;
 
-    function stopAll() {
-      if (nowPlaying === 'kirema') {
-        video.pause();
-        setBtnOff('soundBtn','soundIcon');
-        document.getElementById('kiremaCard').classList.remove('playing');
-      }
-      if (nowPlaying === 'neil') {
-        neilVid.pause();
-        setBtnOff('mackSoundBtn','mackSoundIcon');
-        document.getElementById('neilCard').classList.remove('playing');
+    function showOverlay(which) {
+      const o = document.getElementById(TRACKS[which].overlay);
+      if (o) o.classList.add('visible');
+    }
+    function hideOverlay(which) {
+      const o = document.getElementById(TRACKS[which].overlay);
+      if (o) o.classList.remove('visible');
+    }
+    function hideAllOverlays() {
+      Object.keys(TRACKS).forEach(k => hideOverlay(k));
+    }
+
+    // Flip a card back to front and hide its overlay (called by overlay flip-back btn)
+    function flipBack(cardId, overlayId) {
+      const card = document.getElementById(cardId);
+      const overlay = document.getElementById(overlayId);
+      if (card) card.classList.remove('flipped');
+      if (overlay) overlay.classList.remove('visible');
+    }
+
+    function stopAll(showPaused) {
+      // showPaused = true  → show the paused overlay on the card that was playing
+      // showPaused = false → hide overlay (card is being flipped back to front anyway)
+      if (nowPlaying) {
+        const t = TRACKS[nowPlaying];
+        t.vid().pause();
+        setBtnOff(t.btn, t.icon);
+        document.getElementById(t.card).classList.remove('playing');
+        if (showPaused && document.getElementById(t.card).classList.contains('flipped')) {
+          showOverlay(nowPlaying);
+        } else {
+          hideOverlay(nowPlaying);
+        }
       }
       nowPlaying = null;
     }
 
     function startPlaying(which) {
-      stopAll();
+      stopAll(true); // pause previous and show its overlay
+      hideOverlay(which); // hide THIS card's overlay (we're resuming/starting it)
       nowPlaying = which;
-      if (which === 'kirema') {
-        video.play().catch(()=>{});
-        setBtnOn('soundBtn','soundIcon');
-        document.getElementById('kiremaCard').classList.add('playing');
-      } else if (which === 'neil') {
-        neilVid.play().catch(()=>{});
-        setBtnOn('mackSoundBtn','mackSoundIcon');
-        document.getElementById('neilCard').classList.add('playing');
-      }
+      const t = TRACKS[which];
+      t.vid().play().catch(()=>{});
+      setBtnOn(t.btn, t.icon);
+      document.getElementById(t.card).classList.add('playing');
     }
+
+    const SPEAKER = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+
+    // Tutorial
+    let tutDismissed = false;
+    function dismissTutorial() {
+      tutDismissed = true;
+      const b = document.getElementById('tutBubble');
+      if (b) { b.classList.add('hide'); setTimeout(()=>b.remove(), 300); }
+    }
+    setTimeout(()=>{ if (!tutDismissed) dismissTutorial(); }, 6000);
 
     function setBtnOn(btnId, iconId) {
       const b = document.getElementById(btnId);
+      if (!b) return;
       b.style.background='#2e7d56'; b.style.border='2px solid rgba(77,217,192,0.8)';
       b.style.animation='greenPulse 1.8s ease-in-out infinite';
       document.getElementById(iconId).innerHTML = SPEAKER;
     }
-
     function setBtnOff(btnId, iconId) {
       const b = document.getElementById(btnId);
+      if (!b) return;
       b.style.background='#e53e3e'; b.style.border='2px solid rgba(255,255,255,0.6)';
       b.style.animation='btnPulse 1.2s ease-in-out infinite';
       document.getElementById(iconId).innerHTML = SPEAKER;
     }
 
-    // Button clicks
+    // Red button toggles
     function toggleAudio() {
-      if (nowPlaying === 'kirema') { stopAll(); } else { startPlaying('kirema'); }
+      if (nowPlaying === 'kirema') { stopAll(false); } else { startPlaying('kirema'); }
     }
     function toggleMack() {
-      if (nowPlaying === 'neil') { stopAll(); } else { startPlaying('neil'); }
+      if (nowPlaying === 'neil') { stopAll(false); } else { startPlaying('neil'); }
+    }
+    function toggleGregg() {
+      if (nowPlaying === 'gregg') { stopAll(false); } else { startPlaying('gregg'); }
     }
 
-    // Card flips — start music if not already playing for that card
-    function handleKiremaClick(card) {
+    // Generic card flip (Brittany — no music)
+    function handleGenericClick(card) {
+      dismissTutorial();
+      stopAll(true); // pause music, show overlay on previous card
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped') && nowPlaying !== 'kirema') {
+    }
+
+    // Music card flips
+    function handleKiremaClick(card) {
+      hideOverlay('kirema');
+      card.classList.toggle('flipped');
+      if (card.classList.contains('flipped')) {
         startPlaying('kirema');
+      } else {
+        stopAll(false);
       }
     }
     function handleNeilClick(card) {
+      hideOverlay('neil');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped') && nowPlaying !== 'neil') {
+      if (card.classList.contains('flipped')) {
         startPlaying('neil');
+      } else {
+        stopAll(false);
       }
     }
+    function handleGreggClick(card) {
+      hideOverlay('gregg');
+      card.classList.toggle('flipped');
+      if (card.classList.contains('flipped')) {
+        startPlaying('gregg');
+      } else {
+        stopAll(false);
+      }
+    }
+
     async function submitQ() {
       const q = document.getElementById('qText').value.trim();
       const name = document.getElementById('qName').value.trim();
