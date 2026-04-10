@@ -53,6 +53,7 @@
     @keyframes waveDrift{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(3%,2%) rotate(2deg) scale(1.02)}66%{transform:translate(-2%,3%) rotate(-1deg) scale(0.98)}100%{transform:translate(2%,-2%) rotate(1deg) scale(1.01)}}
     .hero-inner{position:relative;z-index:1;}
     @keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,0.5)}50%{box-shadow:0 0 0 8px rgba(229,62,62,0)}}
+    @keyframes greenPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,125,86,0.5)}50%{box-shadow:0 0 0 8px rgba(46,125,86,0)}}
     @keyframes cardGlow{0%,100%{box-shadow:0 0 20px rgba(77,217,192,0.3),0 0 40px rgba(46,125,86,0.15),0 4px 16px rgba(0,0,0,0.08)}50%{box-shadow:0 0 30px rgba(77,217,192,0.5),0 0 60px rgba(46,125,86,0.25),0 4px 16px rgba(0,0,0,0.08)}}
     .kirema-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
     .kirema-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
@@ -335,75 +336,72 @@
     const audio = document.getElementById('badBunnyAudio');
     const video = document.getElementById('kiremaVideo');
 
-    let mediaPlaying = false;
-    let mackPlaying = false;
     const mackAudio = document.getElementById('mackAudio');
+    const SPEAKER = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+    let nowPlaying = null; // null | 'kirema' | 'neil'
 
-    function toggleMack() {
-      const btn = document.getElementById('mackSoundBtn');
-      const card = document.getElementById('neilCard');
-      const neilVid = document.getElementById('neilVideoCard');
-      if (mackPlaying) {
-        mackAudio.pause();
-        neilVid.pause();
-        mackPlaying = false;
-        btn.style.background = '#e53e3e';
-        btn.style.border = '2px solid rgba(255,255,255,0.6)';
-        btn.style.animation = 'btnPulse 1.2s ease-in-out infinite';
-        document.getElementById('mackSoundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
-        card.classList.remove('playing');
-      } else {
-        mackAudio.play().catch(() => {});
-        neilVid.play().catch(() => {});
-        mackPlaying = true;
-        btn.style.background = '#2e7d56';
-        btn.style.border = '2px solid rgba(77,217,192,0.8)';
-        btn.style.animation = 'none';
-        document.getElementById('mackSoundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-        card.classList.add('playing');
+    function stopAll() {
+      if (nowPlaying === 'kirema') {
+        audio.pause(); video.pause();
+        setBtnOff('soundBtn','soundIcon');
+        document.getElementById('kiremaCard').classList.remove('playing');
+      }
+      if (nowPlaying === 'neil') {
+        mackAudio.pause(); document.getElementById('neilVideoCard').pause();
+        setBtnOff('mackSoundBtn','mackSoundIcon');
+        document.getElementById('neilCard').classList.remove('playing');
+      }
+      nowPlaying = null;
+    }
+
+    function startPlaying(which) {
+      stopAll();
+      nowPlaying = which;
+      if (which === 'kirema') {
+        audio.play().catch(()=>{}); video.play().catch(()=>{});
+        setBtnOn('soundBtn','soundIcon');
+        document.getElementById('kiremaCard').classList.add('playing');
+      } else if (which === 'neil') {
+        mackAudio.play().catch(()=>{}); document.getElementById('neilVideoCard').play().catch(()=>{});
+        setBtnOn('mackSoundBtn','mackSoundIcon');
+        document.getElementById('neilCard').classList.add('playing');
       }
     }
 
+    function setBtnOn(btnId, iconId) {
+      const b = document.getElementById(btnId);
+      b.style.background='#2e7d56'; b.style.border='2px solid rgba(77,217,192,0.8)';
+      b.style.animation='greenPulse 1.8s ease-in-out infinite';
+      document.getElementById(iconId).innerHTML = SPEAKER;
+    }
+
+    function setBtnOff(btnId, iconId) {
+      const b = document.getElementById(btnId);
+      b.style.background='#e53e3e'; b.style.border='2px solid rgba(255,255,255,0.6)';
+      b.style.animation='btnPulse 1.2s ease-in-out infinite';
+      document.getElementById(iconId).innerHTML = SPEAKER;
+    }
+
+    // Button clicks
     function toggleAudio() {
-      const btn = document.getElementById('soundBtn');
-      const card = document.getElementById('kiremaCard');
-      if (mediaPlaying) {
-        audio.pause();
-        video.pause();
-        mediaPlaying = false;
-        btn.style.background = '#e53e3e';
-        btn.style.border = '2px solid rgba(255,255,255,0.6)';
-        btn.style.animation = 'btnPulse 1.2s ease-in-out infinite';
-        btn.title = 'Play music & video';
-        document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
-        card.classList.remove('playing');
-      } else {
-        audio.play().catch(() => {});
-        video.play().catch(() => {});
-        mediaPlaying = true;
-        btn.style.background = '#2e7d56';
-        btn.style.border = '2px solid rgba(77,217,192,0.8)';
-        btn.style.animation = 'none';
-        btn.title = 'Stop music & video';
-        document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-        card.classList.add('playing');
-      }
+      if (nowPlaying === 'kirema') { stopAll(); } else { startPlaying('kirema'); }
+    }
+    function toggleMack() {
+      if (nowPlaying === 'neil') { stopAll(); } else { startPlaying('neil'); }
     }
 
-    function handleNeilClick(card) {
-      const neilVid = document.getElementById('neilVideoCard');
-      card.classList.toggle('flipped');
-      const isFlipped = card.classList.contains('flipped');
-      if (isFlipped) {
-        neilVid.play().catch(() => {});
-      } else {
-        neilVid.pause();
-      }
-    }
-
+    // Card flips — start music if not already playing for that card
     function handleKiremaClick(card) {
       card.classList.toggle('flipped');
-      // Video keeps playing from wherever it is — no pause/resume on flip
+      if (card.classList.contains('flipped') && nowPlaying !== 'kirema') {
+        startPlaying('kirema');
+      }
+    }
+    function handleNeilClick(card) {
+      card.classList.toggle('flipped');
+      if (card.classList.contains('flipped') && nowPlaying !== 'neil') {
+        startPlaying('neil');
+      }
     }
     async function submitQ() {
       const q = document.getElementById('qText').value.trim();
