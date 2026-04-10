@@ -53,12 +53,12 @@
     @keyframes waveDrift{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(3%,2%) rotate(2deg) scale(1.02)}66%{transform:translate(-2%,3%) rotate(-1deg) scale(0.98)}100%{transform:translate(2%,-2%) rotate(1deg) scale(1.01)}}
     .hero-inner{position:relative;z-index:1;}
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-    .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
+    .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
     .cf{perspective:1000px;min-height:380px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
     .ci{position:relative;width:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;display:grid;}
     .cf.flipped .ci{transform:rotateY(180deg);}
-    .kirema-card.flipped{grid-column:span 2;}
-    .kirema-card{transition:transform 0.2s ease, box-shadow 0.2s ease, grid-column 0s;}
+    
+    
     .cf:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(10,60,30,0.14);}
     .cf.flipped .cf-back{visibility:visible;}
     .cf.flipped .cf-front{visibility:hidden;}
@@ -190,10 +190,15 @@
         </div>
       </div>
     </div>
-    <div class="cf kirema-card" id="kiremaCard" onclick="handleKiremaClick(this)" onmouseenter="playBadBunny()" onmouseleave="pauseBadBunny()">
+    <div class="cf kirema-card" id="kiremaCard" onclick="handleKiremaClick(this)">
       <div class="ci">
         <div class="cf-front">
+          <div style="position:relative;">
+          <button id="soundBtn" onclick="event.stopPropagation();toggleAudio()" style="position:absolute;top:8px;right:8px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(46,125,86,0.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:background 0.15s;" title="Play/Pause music">
+            <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
           <div class="cpw"><img src="images/Kirema Garcia-Reyes.png" alt="Kirema Garcia-Reyes"></div>
+          </div>
           <div class="cb">
             <p class="cr">Assistant Professor of Diagnostic, Molecular &amp; IR</p>
             <h2 class="cn">Kirema Garcia-Reyes, MD</h2>
@@ -209,7 +214,7 @@
             <p class="tap-hint">Tap to flip for more &rarr;</p>
           </div>
         </div>
-        <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;">
+        <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);">
           <video id="kiremaVideo" src="videos/NUEVAYOL.mp4" muted playsinline loop
             style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--r);">
           </video>
@@ -308,14 +313,28 @@
     const audio = document.getElementById('badBunnyAudio');
     const video = document.getElementById('kiremaVideo');
 
-    function playBadBunny() {
-      audio.play().catch(() => {}); // catch autoplay policy errors silently
+    let audioPlaying = false;
+
+    function toggleAudio() {
+      if (audioPlaying) {
+        audio.pause();
+        audioPlaying = false;
+        updateSoundIcon(false);
+      } else {
+        audio.play().catch(() => {});
+        audioPlaying = true;
+        updateSoundIcon(true);
+      }
     }
 
-    function pauseBadBunny() {
-      const card = document.getElementById('kiremaCard');
-      if (!card.classList.contains('flipped')) {
-        audio.pause();
+    function updateSoundIcon(playing) {
+      const icon = document.getElementById('soundIcon');
+      if (playing) {
+        // Mute icon with X
+        icon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+      } else {
+        // Speaker with waves
+        icon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
       }
     }
 
@@ -323,13 +342,9 @@
       card.classList.toggle('flipped');
       const isFlipped = card.classList.contains('flipped');
       if (isFlipped) {
-        // Card flipped to back — play video, keep audio going
         video.play().catch(() => {});
-        audio.play().catch(() => {});
       } else {
-        // Card flipped back to front — pause video
         video.pause();
-        // Keep audio playing since we're still hovered
       }
     }
     async function submitQ() {
