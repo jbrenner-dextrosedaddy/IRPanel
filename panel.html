@@ -52,8 +52,9 @@
     .hero-wave svg:nth-child(3){animation-duration:22s;opacity:0.04;}
     @keyframes waveDrift{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(3%,2%) rotate(2deg) scale(1.02)}66%{transform:translate(-2%,3%) rotate(-1deg) scale(0.98)}100%{transform:translate(2%,-2%) rotate(1deg) scale(1.01)}}
     .hero-inner{position:relative;z-index:1;}
+    @keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,0.5)}50%{box-shadow:0 0 0 6px rgba(229,62,62,0)}}
     .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-    .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
+    .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 0;}
     .cf{perspective:1000px;min-height:380px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
     .ci{position:relative;width:100%;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;display:grid;}
     .cf.flipped .ci{transform:rotateY(180deg);}
@@ -77,7 +78,7 @@
     .ct{display:flex;flex-direction:column;gap:2px;}
     .ct span{font-size:12px;color:var(--muted);line-height:1.5;display:block;text-align:center;}
     .chr{border:none;border-top:1px solid var(--border);margin:0 0 0.75rem;}
-    .tap-hint{font-size:11px;color:var(--muted);text-align:center;padding-top:0.4rem;opacity:0.6;letter-spacing:0.02em;}
+    .tap-hint{font-size:11px;font-weight:500;color:var(--g2);text-align:center;padding:5px 14px;border:1.5px solid var(--g2);border-radius:100px;display:inline-block;margin-top:0.5rem;letter-spacing:0.02em;cursor:pointer;transition:background 0.15s,color 0.15s;}
     .socials{display:flex;gap:7px;flex-wrap:wrap;padding-top:0.5rem;justify-content:center;}
     .sb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);color:var(--mid);background:#ffffff;transition:all 0.15s;text-decoration:none;flex-shrink:0;}
     .sb svg{width:14px;height:14px;flex-shrink:0;}
@@ -175,7 +176,7 @@
               <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
               <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             </div>
-            <p class="tap-hint">Tap to flip for more &rarr;</p>
+            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
         <div class="cf-back">
@@ -194,7 +195,7 @@
       <div class="ci">
         <div class="cf-front">
           <div style="position:relative;">
-          <button id="soundBtn" onclick="event.stopPropagation();toggleAudio()" style="position:absolute;top:8px;right:8px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(46,125,86,0.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:background 0.15s;" title="Play/Pause music">
+          <button id="soundBtn" onclick="event.stopPropagation();toggleAudio()" style="position:absolute;top:8px;right:8px;z-index:10;width:34px;height:34px;border-radius:50%;background:#e53e3e;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.25);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
             <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <div class="cpw"><img src="images/Kirema Garcia-Reyes.png" alt="Kirema Garcia-Reyes"></div>
@@ -211,7 +212,7 @@
               <a href="https://www.instagram.com/kirema1/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
               <a href="https://x.com/kiremagarciamd" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             </div>
-            <p class="tap-hint">Tap to flip for more &rarr;</p>
+            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
         <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);">
@@ -246,7 +247,7 @@
               <a href="https://www.instagram.com/greggkhodorov.md/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
               <a href="https://x.com/GreggKhodorov" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             </div>
-            <p class="tap-hint">Tap to flip for more &rarr;</p>
+            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
         <div class="cf-back">
@@ -276,7 +277,7 @@
               <a href="https://www.instagram.com/neilmanofsteel/" target="_blank" rel="noopener" class="sb instagram" onclick="event.stopPropagation()" title="instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
               <a href="https://x.com/DigitalAngio" target="_blank" rel="noopener" class="sb twitter" onclick="event.stopPropagation()" title="twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             </div>
-            <p class="tap-hint">Tap to flip for more &rarr;</p>
+            <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
         <div class="cf-back">
@@ -313,39 +314,34 @@
     const audio = document.getElementById('badBunnyAudio');
     const video = document.getElementById('kiremaVideo');
 
-    let audioPlaying = false;
+    let mediaPlaying = false;
 
     function toggleAudio() {
-      if (audioPlaying) {
+      const btn = document.getElementById('soundBtn');
+      if (mediaPlaying) {
         audio.pause();
-        audioPlaying = false;
-        updateSoundIcon(false);
+        video.pause();
+        mediaPlaying = false;
+        // Red + blinking
+        btn.style.background = '#e53e3e';
+        btn.style.animation = 'btnPulse 1.2s ease-in-out infinite';
+        btn.title = 'Play music & video';
+        document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
       } else {
         audio.play().catch(() => {});
-        audioPlaying = true;
-        updateSoundIcon(true);
-      }
-    }
-
-    function updateSoundIcon(playing) {
-      const icon = document.getElementById('soundIcon');
-      if (playing) {
-        // Mute icon with X
-        icon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-      } else {
-        // Speaker with waves
-        icon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+        video.play().catch(() => {});
+        mediaPlaying = true;
+        // Green + no pulse
+        btn.style.background = '#2e7d56';
+        btn.style.animation = 'none';
+        btn.title = 'Stop music & video';
+        document.getElementById('soundIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
       }
     }
 
     function handleKiremaClick(card) {
       card.classList.toggle('flipped');
-      const isFlipped = card.classList.contains('flipped');
-      if (isFlipped) {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
+      // Video keeps playing from wherever it is — no pause/resume on flip
     }
     async function submitQ() {
       const q = document.getElementById('qText').value.trim();
