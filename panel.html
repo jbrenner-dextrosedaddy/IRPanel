@@ -27,7 +27,7 @@
     /* HERO — white */
     .hero{position:relative;z-index:1;background:#ffffff;padding:3rem 2.5rem 2.5rem;border-bottom:1px solid rgba(46,125,86,0.08);overflow:hidden;}
     .hero-eyebrow{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--g2);margin-bottom:1rem;font-weight:500;}
-    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}.hero h1{font-family:var(--sf);font-weight:400;font-size:clamp(18px,3vw,28px);line-height:1.25;color:var(--text);margin:0 0 1.25rem;}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}.hero h1{font-family:var(--sf);font-weight:700;font-size:clamp(18px,3vw,28px);line-height:1.25;color:var(--text);letter-spacing:-0.02em;margin:0 0 1.25rem;}
     .hero-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
     .hero-meta-row{display:inline-flex;align-items:center;gap:9px;font-size:16px;color:var(--text);font-weight:500;}
     .hero-meta-row svg{width:16px;height:16px;color:var(--g2);flex-shrink:0;}
@@ -58,7 +58,11 @@
     .kirema-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
     .neil-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
     .neil-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
-    .section-label{position:relative;z-index:1;text-align:center;padding:2rem 1rem 0.75rem;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+    .gregg-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
+    .gregg-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
+    .brittany-card.playing{animation:cardGlow 2s ease-in-out infinite!important;background:linear-gradient(145deg,#f0fdf8,#e8f5ee,#f0fdf8)!important;}
+    .brittany-card.playing .cf-front{background:linear-gradient(145deg,#f7fefb,#edfbf4)!important;}
+    .section-label{position:relative;z-index:1;padding:2rem 1.25rem 0.5rem;max-width:1100px;margin:0 auto;font-size:clamp(28px,4vw,40px);font-weight:700;color:#1d1d1f;letter-spacing:-0.025em;line-height:1.1;}
     .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:520px;gap:1.25rem;max-width:1100px;margin:0 auto;padding:0.5rem 1.25rem 2rem;}
     .cf{perspective:1000px;transition:transform 0.2s ease,box-shadow 0.2s ease;border-radius:var(--r);}
     .cf .ci{height:100%!important;}
@@ -141,16 +145,62 @@
     .tut-skip:hover{color:var(--g2);}
     .tut-arrow-down{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--g2);}
     .tut-arrow-down::after{content:'';position:absolute;top:-9px;left:-7px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid #fff;}
-    /* Page legend */
-    .page-legend{position:relative;z-index:1;max-width:1100px;margin:0 auto 2rem;padding:0 1.25rem;}
-    .legend-box{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
-    .legend-title{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
-    .legend-items{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;}
-    .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text);}
-    .legend-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .legend-icon.sound{background:#e53e3e;border:2px solid rgba(255,255,255,0.6);box-shadow:0 2px 8px rgba(229,62,62,0.4);}
-    .legend-icon.flip{background:var(--gl);border:2px solid var(--g2);}
-    @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:1.5rem;}.hero{padding:2rem 1.5rem;}}@media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero h1{font-size:18px;}.grid{grid-template-columns:1fr;padding:0.5rem 1rem 0;gap:1rem;}.cf{height:auto;min-height:520px;}.ci{min-height:520px;}}
+    /* Section tab bar — centered pill style */
+    .section-tabs{position:sticky;top:64px;z-index:90;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 2.5rem;}
+    .section-tabs-inner{max-width:1100px;margin:0 auto;display:flex;gap:4px;align-items:center;justify-content:center;}
+    .stab{font-size:14px;font-weight:500;color:#6e6e73;text-decoration:none;padding:7px 18px;border-radius:100px;border:none;background:transparent;transition:all 0.15s;white-space:nowrap;cursor:pointer;font-family:var(--sf);}
+    .stab:hover{color:#1d1d1f;background:rgba(0,0,0,0.05);}
+    .stab.active{color:#1d1d1f;background:rgba(0,0,0,0.08);font-weight:600;}
+    /* Page sections */
+    .page-section{display:none;position:relative;z-index:1;}
+    .page-section.active{display:block;}
+    /* Survey section */
+    .survey-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+    .survey-form-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);}
+    .survey-form-box h2{font-size:20px;font-weight:600;color:#1d1d1f;margin-bottom:0.35rem;}
+    .survey-form-box .sub{font-size:14px;color:#6e6e73;margin-bottom:1.5rem;}
+    .sq{margin-bottom:1.25rem;}
+    .sq-label{font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:8px;display:block;line-height:1.4;}
+    .sq-num{display:inline-block;width:20px;height:20px;background:var(--g2);color:#fff;border-radius:50%;font-size:11px;font-weight:700;text-align:center;line-height:20px;margin-right:6px;flex-shrink:0;}
+    .sq-opts{display:flex;flex-direction:column;gap:6px;}
+    .sq-opt{display:flex;align-items:center;gap:9px;padding:8px 12px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.15s;font-size:13px;color:#1d1d1f;}
+    .sq-opt:hover{border-color:var(--g2);background:var(--gl);}
+    .sq-opt input{accent-color:var(--g2);width:14px;height:14px;cursor:pointer;flex-shrink:0;}
+    .sq-opt.selected{border-color:var(--g2);background:var(--gl);}
+    .survey-submit{width:100%;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:var(--sf);font-size:14px;font-weight:600;cursor:pointer;margin-top:0.5rem;transition:opacity 0.15s,transform 0.1s;}
+    .survey-submit:hover{opacity:0.9;transform:translateY(-1px);}
+    .survey-success{display:none;text-align:center;padding:2rem;font-size:15px;color:var(--g2);font-weight:600;}
+    /* Live results panel */
+    .results-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);position:sticky;top:130px;}
+    .results-box h2{font-size:18px;font-weight:600;color:#1d1d1f;margin-bottom:0.25rem;}
+    .results-box .sub{font-size:13px;color:#6e6e73;margin-bottom:1.5rem;}
+    .live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#e53e3e;letter-spacing:0.05em;text-transform:uppercase;}
+    .live-dot{width:7px;height:7px;background:#e53e3e;border-radius:50%;animation:livePulse 1.4s ease-in-out infinite;}
+    @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+    .rq{margin-bottom:1.25rem;}
+    .rq-label{font-size:12px;font-weight:600;color:#1d1d1f;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+    .rq-bar-wrap{display:flex;flex-direction:column;gap:4px;}
+    .rq-row{display:flex;align-items:center;gap:8px;font-size:11px;color:#6e6e73;}
+    .rq-bar-track{flex:1;height:8px;background:#f0f0f5;border-radius:100px;overflow:hidden;}
+    .rq-bar-fill{height:100%;background:linear-gradient(90deg,var(--g2),var(--teal));border-radius:100px;transition:width 0.6s ease;}
+    .rq-pct{font-size:11px;font-weight:600;color:var(--g2);width:28px;text-align:right;}
+    .rq-opt-label{width:130px;flex-shrink:0;line-height:1.3;}
+    /* Questions section */
+    .questions-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+    .qform-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);}
+    .qform-box h2{font-size:20px;font-weight:600;color:#1d1d1f;margin-bottom:0.35rem;}
+    .qform-box .sub{font-size:14px;color:#6e6e73;margin-bottom:1.5rem;}
+    .qlive-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);position:sticky;top:130px;}
+    .qlive-box h2{font-size:18px;font-weight:600;color:#1d1d1f;margin-bottom:0.25rem;}
+    .qlive-box .sub{font-size:13px;color:#6e6e73;margin-bottom:1.5rem;}
+    .q-feed{display:flex;flex-direction:column;gap:10px;max-height:500px;overflow-y:auto;}
+    .q-card{background:#f9f9fb;border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+    .q-card-text{font-size:14px;color:#1d1d1f;line-height:1.5;margin-bottom:4px;}
+    .q-card-meta{font-size:11px;color:#6e6e73;}
+    .q-empty{font-size:13px;color:#aaa;text-align:center;padding:2rem 0;font-style:italic;}
+    @media(max-width:820px){.survey-wrap,.questions-wrap{grid-template-columns:1fr;}.results-box,.qlive-box{position:static;}}
+    @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:1.5rem;}.hero{padding:2rem 1.5rem;}}
+    @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}.hero h1{font-size:18px;}.grid{grid-template-columns:1fr;padding:0.5rem 1rem 0;gap:1rem;}.cf{height:auto;min-height:520px;}.ci{min-height:520px;}.section-tabs{padding:0 1rem;}.stab{padding:12px 12px;font-size:13px;}}
   </style>
 </head>
 <body>
@@ -161,13 +211,22 @@
     <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
+  <!-- Section tab bar -->
+  <div class="section-tabs">
+    <div class="section-tabs-inner">
+      <button class="stab active" onclick="showSection('panelists',this)">Meet the Panelists</button>
+      <button class="stab" onclick="showSection('survey',this)">Mentorship Survey</button>
+      <button class="stab" onclick="showSection('questions',this)">Submit a Question</button>
+    </div>
+  </div>
+
   <header class="hero">
     <div class="hero-wave">
       <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg"><path d="M0,200 C150,100 350,300 500,200 C650,100 750,250 800,200 L800,400 L0,400 Z" fill="#2e7d56"/></svg>
       <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg"><path d="M0,250 C200,150 300,350 500,250 C700,150 750,300 800,250 L800,400 L0,400 Z" fill="#4dd9c0"/></svg>
       <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg"><path d="M0,180 C100,280 400,80 600,180 C700,230 780,160 800,180 L800,400 L0,400 Z" fill="#43a373"/></svg>
     </div>
-    <div class="hero-inner">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
       <div>
         <p class="hero-eyebrow">SIR 2026 &mdash; Panel Session</p>
         <h1>Untapped Opportunities in IR: Bridging the Gap, Exploring Innovative Engagement, and Providing Tailored Mentorship Solutions</h1>
@@ -177,35 +236,26 @@
         </div>
         <div class="hero-divider"></div>
       </div>
-      <div class="q-box">
-        <h3>Submit a Question</h3>
-        <p>Ask our panelists anything. You can stay anonymous.</p>
-        <div id="qForm">
-          <input type="text" class="q-name" id="qName" placeholder="Your name (optional)">
-          <textarea class="q-text" id="qText" placeholder="Type your question here&hellip;"></textarea>
-          <label class="q-anon"><input type="checkbox" id="qAnon" onchange="document.getElementById('qName').disabled=this.checked; if(this.checked) document.getElementById('qName').value=''"> Submit anonymously</label>
-          <button class="q-btn" onclick="submitQ()">Submit Question &rarr;</button>
-        </div>
-        <div class="q-success" id="qSuccess">&#10003; Your question has been submitted!</div>
-      </div>
     </div>
   </header>
 
-  <p class="section-label">Meet the Panelists</p>
+  <!-- ── SECTION 1: PANELISTS ── -->
+  <div class="page-section active" id="sec-panelists">
+  <p class="section-label">Meet the Panelists.</p>
 
   <!-- Legend / key -->
-  <div class="page-legend">
-    <div class="legend-box">
-      <span class="legend-title">How it works:</span>
-      <div class="legend-items">
-        <div class="legend-item">
-          <div class="legend-icon flip">
+  <div style="position:relative;z-index:1;max-width:1100px;margin:1.5rem auto 1rem;padding:0 1.25rem;">
+    <div style="background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap;">
+      <span style="font-size:17px;font-weight:700;color:#1d1d1f;white-space:nowrap;letter-spacing:-0.02em;">How it works</span>
+      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#1d1d1f;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gl);border:2px solid var(--g2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--g2)" stroke-width="2" width="16" height="16"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
           </div>
           <span><strong>Tap any card</strong> to flip it &amp; see social links</span>
         </div>
-        <div class="legend-item">
-          <div class="legend-icon sound">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#1d1d1f;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#e53e3e;border:2px solid rgba(255,255,255,0.6);box-shadow:0 2px 8px rgba(229,62,62,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
           </div>
           <span><strong>Red button</strong> = play that panelist's favorite song</span>
@@ -215,17 +265,15 @@
   </div>
 
   <div class="grid">
-    <div class="cf brittany-card" id="brittanyCard" onclick="handleGenericClick(this)">
+    <div class="cf brittany-card" id="brittanyCard" onclick="handleBrittanyClick(this)">
       <div class="ci">
         <div class="cf-front" style="position:relative;">
-          <!-- Tutorial bubble -->
-          <div class="tutorial-bubble" id="tutBubble">
-            <div class="tut-arrows">👆</div>
-            <div class="tut-text">Tap card to flip &amp; connect!<br><span style="font-weight:400;color:var(--muted);">🔴 Red button = play music</span></div>
-            <button class="tut-skip" onclick="event.stopPropagation();dismissTutorial()">skip tutorial ✕</button>
-            <div class="tut-arrow-down"></div>
+          <div style="position:relative;">
+            <button id="brittanySoundBtn" onclick="event.stopPropagation();toggleBrittany()" style="position:absolute;top:14px;right:14px;z-index:10;width:44px;height:44px;border-radius:50%;background:#e53e3e;border:2px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.3);animation:btnPulse 1.2s ease-in-out infinite;" title="Play music">
+              <svg id="brittanySoundIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+            <div class="cpw"><img src="images/Brittany Brookner.png" alt="Brittany Brookner"></div>
           </div>
-          <div class="cpw"><img src="images/Brittany Brookner.png" alt="Brittany Brookner"></div>
           <div class="cb">
             <p class="cr">PGY-1 Integrated IR Resident</p>
             <h2 class="cn">Brittany Brookner, MD</h2>
@@ -241,15 +289,30 @@
             <div style="text-align:center;padding-bottom:0.5rem;"><span class="tap-hint">Flip for more &rarr;</span></div>
           </div>
         </div>
-        <div class="cf-back">
-          <p class="bn">Brittany Brookner, MD</p>
-          <p class="br">PGY-1 Integrated IR Resident</p>
-          <div class="bs">
-            <a href="https://www.linkedin.com/in/brittany-brookner-she-her-767833123/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg><div class="bsl"><span class="bsp">LinkedIn</span><span class="bsh">Brittany Brookner</span></div></a>
-            <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><div class="bsl"><span class="bsp">Instagram</span><span class="bsh">@brittanyj.b</span></div></a>
-            <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><div class="bsl"><span class="bsp">X / Twitter</span><span class="bsh">@brittanyj_b</span></div></a>
+        <div class="cf-back" id="brittanyBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
+          <video id="brittanyVideo" src="video/DREAMS.mp4" playsinline loop
+            style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
+          </video>
+          <div class="paused-overlay" id="brittanyPausedOverlay">
+            <p class="po-label">Paused</p>
+            <div class="po-btns">
+              <button class="po-btn po-play" onclick="event.stopPropagation();startPlaying('brittany')">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,3 19,12 5,21"/></svg> Resume
+              </button>
+              <button class="po-btn po-flip" onclick="event.stopPropagation();flipBack('brittanyCard','brittanyPausedOverlay')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> Flip back
+              </button>
+            </div>
           </div>
-          <p class="bc">tap to flip back</p>
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;gap:8px;align-items:center;">
+            <p class="bn" style="margin:0;font-size:16px;">Brittany Brookner, MD</p>
+            <div style="display:flex;gap:10px;">
+              <a href="https://www.linkedin.com/in/brittany-brookner-she-her-767833123/" target="_blank" rel="noopener" class="bsb linkedin" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.68c-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/brittanyj.b/" target="_blank" rel="noopener" class="bsb instagram" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@brittanyj.b</a>
+              <a href="https://x.com/brittanyj_b" target="_blank" rel="noopener" class="bsb twitter" onclick="event.stopPropagation()" style="padding:8px 12px;font-size:12px;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@brittanyj_b</a>
+            </div>
+            <p class="bc" style="margin-top:4px;">tap to flip back</p>
+          </div>
         </div>
       </div>
     </div>
@@ -278,7 +341,7 @@
           </div>
         </div>
         <div class="cf-back" id="kiremaBack" style="padding:0;overflow:hidden;position:relative;border-radius:var(--r);height:100%;">
-          <video id="kiremaVideo" src="video/NUEVAYOL.mp4" playsinline loop
+          <video id="kiremaVideo" src="video/MUDANZA.mp4" playsinline loop
             style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;">
           </video>
           <!-- Paused overlay -->
@@ -409,6 +472,158 @@
     </div>
   </div>
 
+  </div><!-- end sec-panelists -->
+
+  <!-- ── SECTION 2: MENTORSHIP SURVEY ── -->
+  <div class="page-section" id="sec-survey">
+    <div class="survey-wrap">
+      <!-- Left: form -->
+      <div class="survey-form-box">
+        <h2>Mentorship Survey</h2>
+        <p class="sub">Quick 2-min survey. Results appear live on the right.</p>
+        <div id="surveyForm">
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">1</span>What year are you in training?</span>
+            <div class="sq-opts" data-q="q1">
+              <label class="sq-opt"><input type="radio" name="q1" value="Pre-med"> Pre-med</label>
+              <label class="sq-opt"><input type="radio" name="q1" value="MS1/MS2"> MS1 / MS2</label>
+              <label class="sq-opt"><input type="radio" name="q1" value="MS3/MS4"> MS3 / MS4</label>
+              <label class="sq-opt"><input type="radio" name="q1" value="Resident/Fellow"> Resident / Fellow</label>
+              <label class="sq-opt"><input type="radio" name="q1" value="Attending/Other"> Attending / Other</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">2</span>How would you rate your current access to IR mentorship?</span>
+            <div class="sq-opts" data-q="q2">
+              <label class="sq-opt"><input type="radio" name="q2" value="No access"> No access</label>
+              <label class="sq-opt"><input type="radio" name="q2" value="Limited"> Limited</label>
+              <label class="sq-opt"><input type="radio" name="q2" value="Moderate"> Moderate</label>
+              <label class="sq-opt"><input type="radio" name="q2" value="Strong"> Strong</label>
+              <label class="sq-opt"><input type="radio" name="q2" value="Very strong"> Very strong</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">3</span>How did you first learn about IR?</span>
+            <div class="sq-opts" data-q="q3">
+              <label class="sq-opt"><input type="radio" name="q3" value="Clerkship"> Clerkship</label>
+              <label class="sq-opt"><input type="radio" name="q3" value="Social media"> Social media</label>
+              <label class="sq-opt"><input type="radio" name="q3" value="A mentor"> A mentor</label>
+              <label class="sq-opt"><input type="radio" name="q3" value="Research"> Research</label>
+              <label class="sq-opt"><input type="radio" name="q3" value="Conference"> Conference / Other</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">4</span>Do you currently have a mentor in IR?</span>
+            <div class="sq-opts" data-q="q4">
+              <label class="sq-opt"><input type="radio" name="q4" value="Yes, formal"> Yes, formal</label>
+              <label class="sq-opt"><input type="radio" name="q4" value="Yes, informal"> Yes, informal</label>
+              <label class="sq-opt"><input type="radio" name="q4" value="No, looking"> No, but actively looking</label>
+              <label class="sq-opt"><input type="radio" name="q4" value="No, unsure"> No, not sure how to find one</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">5</span>Biggest barrier to finding IR mentorship?</span>
+            <div class="sq-opts" data-q="q5">
+              <label class="sq-opt"><input type="radio" name="q5" value="No home IR program"> No home IR program</label>
+              <label class="sq-opt"><input type="radio" name="q5" value="Don't know how to reach out"> Don't know how to reach out</label>
+              <label class="sq-opt"><input type="radio" name="q5" value="Imposter syndrome"> Imposter syndrome</label>
+              <label class="sq-opt"><input type="radio" name="q5" value="Time/geography"> Time / Geography</label>
+              <label class="sq-opt"><input type="radio" name="q5" value="No barrier"> No major barrier</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">6</span>Have you ever cold-messaged someone for mentorship?</span>
+            <div class="sq-opts" data-q="q6">
+              <label class="sq-opt"><input type="radio" name="q6" value="Yes, worked"> Yes, and it worked</label>
+              <label class="sq-opt"><input type="radio" name="q6" value="Yes, no reply"> Yes, but no response</label>
+              <label class="sq-opt"><input type="radio" name="q6" value="No, intimidating"> No, too intimidating</label>
+              <label class="sq-opt"><input type="radio" name="q6" value="No, didn't think to"> No, didn't think to</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">7</span>Most useful platform for professional networking in IR?</span>
+            <div class="sq-opts" data-q="q7">
+              <label class="sq-opt"><input type="radio" name="q7" value="Instagram"> Instagram</label>
+              <label class="sq-opt"><input type="radio" name="q7" value="X/Twitter"> X (Twitter)</label>
+              <label class="sq-opt"><input type="radio" name="q7" value="LinkedIn"> LinkedIn</label>
+              <label class="sq-opt"><input type="radio" name="q7" value="None"> None / I don't use social media for this</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">8</span>Comfort posting your own content online professionally?</span>
+            <div class="sq-opts" data-q="q8">
+              <label class="sq-opt"><input type="radio" name="q8" value="Very uncomfortable"> Very uncomfortable</label>
+              <label class="sq-opt"><input type="radio" name="q8" value="Somewhat uncomfortable"> Somewhat uncomfortable</label>
+              <label class="sq-opt"><input type="radio" name="q8" value="Neutral"> Neutral</label>
+              <label class="sq-opt"><input type="radio" name="q8" value="Comfortable"> Comfortable</label>
+              <label class="sq-opt"><input type="radio" name="q8" value="Very comfortable"> Very comfortable</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">9</span>What type of mentorship do you feel is most missing?</span>
+            <div class="sq-opts" data-q="q9">
+              <label class="sq-opt"><input type="radio" name="q9" value="Career guidance"> Career guidance</label>
+              <label class="sq-opt"><input type="radio" name="q9" value="Research opportunities"> Research opportunities</label>
+              <label class="sq-opt"><input type="radio" name="q9" value="Emotional support"> Emotional support</label>
+              <label class="sq-opt"><input type="radio" name="q9" value="Sponsorship"> Sponsorship</label>
+              <label class="sq-opt"><input type="radio" name="q9" value="Clinical/technical advice"> Clinical / technical advice</label>
+            </div>
+          </div>
+          <div class="sq">
+            <span class="sq-label"><span class="sq-num">10</span>What would keep you most engaged with a mentor long-term?</span>
+            <div class="sq-opts" data-q="q10">
+              <label class="sq-opt"><input type="radio" name="q10" value="Regular check-ins"> Regular check-ins</label>
+              <label class="sq-opt"><input type="radio" name="q10" value="Research collaboration"> Research collaboration</label>
+              <label class="sq-opt"><input type="radio" name="q10" value="Invested in my goals"> Them investing in my specific goals</label>
+              <label class="sq-opt"><input type="radio" name="q10" value="Peer network"> Access to their peer network</label>
+              <label class="sq-opt"><input type="radio" name="q10" value="Social connection"> Social connection</label>
+            </div>
+          </div>
+          <button class="survey-submit" onclick="submitSurvey()">Submit Survey →</button>
+        </div>
+        <div class="survey-success" id="surveySuccess">✓ Thanks for completing the survey! Your responses are now live.</div>
+      </div>
+      <!-- Right: live results -->
+      <div class="results-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
+          <h2>Live Results</h2>
+          <span class="live-badge"><span class="live-dot"></span>Live</span>
+        </div>
+        <p class="sub" id="responseCount">0 responses so far</p>
+        <div id="liveResults">
+          <p class="q-empty">Results will appear here as responses come in.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- end sec-survey -->
+
+  <!-- ── SECTION 3: SUBMIT A QUESTION ── -->
+  <div class="page-section" id="sec-questions">
+    <div class="questions-wrap">
+      <!-- Left: form -->
+      <div class="qform-box">
+        <h2>Submit a Question</h2>
+        <p class="sub">Ask our panelists anything. You can stay anonymous.</p>
+        <input type="text" class="q-name" id="qName" placeholder="Your name (optional)" style="margin-bottom:8px;">
+        <textarea class="q-text" id="qText" placeholder="Type your question here…" style="margin-bottom:8px;"></textarea>
+        <label class="q-anon" style="margin-bottom:12px;"><input type="checkbox" id="qAnon" onchange="document.getElementById('qName').disabled=this.checked; if(this.checked) document.getElementById('qName').value=''"> Submit anonymously</label>
+        <button class="q-btn" onclick="submitQ()" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:var(--sf);font-size:14px;font-weight:600;cursor:pointer;">Submit Question →</button>
+        <div class="q-success" id="qSuccess" style="display:none;text-align:center;padding:1rem 0;font-size:14px;color:var(--g2);font-weight:500;">✓ Your question has been submitted!</div>
+      </div>
+      <!-- Right: live feed -->
+      <div class="qlive-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
+          <h2>Questions</h2>
+          <span class="live-badge"><span class="live-dot"></span>Live</span>
+        </div>
+        <p class="sub">Newest first. Updates every 4 seconds.</p>
+        <div class="q-feed" id="qFeed">
+          <p class="q-empty">No questions yet. Be the first!</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- end sec-questions -->
+
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
@@ -425,9 +640,10 @@
 
     // Map of which card/overlay/btn each track uses
     const TRACKS = {
-      kirema: { vid: ()=>document.getElementById('kiremaVideo'), card: 'kiremaCard', overlay: 'kiremaPausedOverlay', btn: 'soundBtn', icon: 'soundIcon' },
-      neil:   { vid: ()=>document.getElementById('neilVideoCard'), card: 'neilCard', overlay: 'neilPausedOverlay', btn: 'mackSoundBtn', icon: 'mackSoundIcon' },
-      gregg:  { vid: ()=>document.getElementById('greggVideo'), card: 'greggCard', overlay: 'greggPausedOverlay', btn: 'greggSoundBtn', icon: 'greggSoundIcon' },
+      kirema:   { vid: ()=>document.getElementById('kiremaVideo'),   card: 'kiremaCard',   overlay: 'kiremaPausedOverlay',   btn: 'soundBtn',         icon: 'soundIcon'         },
+      neil:     { vid: ()=>document.getElementById('neilVideoCard'), card: 'neilCard',     overlay: 'neilPausedOverlay',     btn: 'mackSoundBtn',     icon: 'mackSoundIcon'     },
+      gregg:    { vid: ()=>document.getElementById('greggVideo'),    card: 'greggCard',    overlay: 'greggPausedOverlay',    btn: 'greggSoundBtn',    icon: 'greggSoundIcon'    },
+      brittany: { vid: ()=>document.getElementById('brittanyVideo'), card: 'brittanyCard', overlay: 'brittanyPausedOverlay', btn: 'brittanySoundBtn', icon: 'brittanySoundIcon' },
     };
 
     let nowPlaying = null;
@@ -505,70 +721,165 @@
       document.getElementById(iconId).innerHTML = SPEAKER;
     }
 
-    // Red button toggles
-    function toggleAudio() {
-      if (nowPlaying === 'kirema') { stopAll(false); } else { startPlaying('kirema'); }
-    }
-    function toggleMack() {
-      if (nowPlaying === 'neil') { stopAll(false); } else { startPlaying('neil'); }
-    }
-    function toggleGregg() {
-      if (nowPlaying === 'gregg') { stopAll(false); } else { startPlaying('gregg'); }
-    }
+    function toggleAudio()   { if (nowPlaying === 'kirema')   { stopAll(false); } else { startPlaying('kirema');   } }
+    function toggleMack()    { if (nowPlaying === 'neil')     { stopAll(false); } else { startPlaying('neil');     } }
+    function toggleGregg()   { if (nowPlaying === 'gregg')    { stopAll(false); } else { startPlaying('gregg');    } }
+    function toggleBrittany(){ if (nowPlaying === 'brittany') { stopAll(false); } else { startPlaying('brittany'); } }
 
-    // Generic card flip (Brittany — no music)
-    function handleGenericClick(card) {
-      dismissTutorial();
-      stopAll(true); // pause music, show overlay on previous card
+    function handleGenericClick(card) { stopAll(true); card.classList.toggle('flipped'); }
+    function handleBrittanyClick(card) {
+      hideOverlay('brittany');
       card.classList.toggle('flipped');
+      if (card.classList.contains('flipped')) { startPlaying('brittany'); } else { stopAll(false); }
     }
 
     // Music card flips
     function handleKiremaClick(card) {
       hideOverlay('kirema');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) {
-        startPlaying('kirema');
-      } else {
-        stopAll(false);
-      }
+      if (card.classList.contains('flipped')) { startPlaying('kirema'); } else { stopAll(false); }
     }
     function handleNeilClick(card) {
       hideOverlay('neil');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) {
-        startPlaying('neil');
-      } else {
-        stopAll(false);
-      }
+      if (card.classList.contains('flipped')) { startPlaying('neil'); } else { stopAll(false); }
     }
     function handleGreggClick(card) {
       hideOverlay('gregg');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) {
-        startPlaying('gregg');
-      } else {
-        stopAll(false);
-      }
+      if (card.classList.contains('flipped')) { startPlaying('gregg'); } else { stopAll(false); }
     }
+
+    // ── Section tabs ──
+    function showSection(name, btn) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+      document.getElementById('sec-' + name).classList.add('active');
+      btn.classList.add('active');
+      if (name === 'survey') { pollSurvey(); }
+      if (name === 'questions') { pollQuestions(); }
+    }
+
+    // ── Survey ──
+    let surveyData = {}; // local accumulation for live results display
+    let totalResponses = 0;
+
+    const QUESTIONS = [
+      { key:'q1', label:'Year in training', opts:['Pre-med','MS1/MS2','MS3/MS4','Resident/Fellow','Attending/Other'] },
+      { key:'q2', label:'Access to IR mentorship', opts:['No access','Limited','Moderate','Strong','Very strong'] },
+      { key:'q3', label:'How I first learned about IR', opts:['Clerkship','Social media','A mentor','Research','Conference'] },
+      { key:'q4', label:'Currently have IR mentor', opts:['Yes, formal','Yes, informal','No, looking','No, unsure'] },
+      { key:'q5', label:'Biggest barrier', opts:['No home IR program','Don\'t know how to reach out','Imposter syndrome','Time/geography','No barrier'] },
+      { key:'q6', label:'Ever cold-messaged for mentorship', opts:['Yes, worked','Yes, no reply','No, intimidating','No, didn\'t think to'] },
+      { key:'q7', label:'Best networking platform', opts:['Instagram','X/Twitter','LinkedIn','None'] },
+      { key:'q8', label:'Comfort posting content online', opts:['Very uncomfortable','Somewhat uncomfortable','Neutral','Comfortable','Very comfortable'] },
+      { key:'q9', label:'Most missing mentorship type', opts:['Career guidance','Research opportunities','Emotional support','Sponsorship','Clinical/technical advice'] },
+      { key:'q10', label:'Keeps you engaged with mentor', opts:['Regular check-ins','Research collaboration','Invested in my goals','Peer network','Social connection'] },
+    ];
+
+    function submitSurvey() {
+      const answers = {};
+      let answered = 0;
+      QUESTIONS.forEach(q => {
+        const el = document.querySelector(`input[name="${q.key}"]:checked`);
+        if (el) { answers[q.key] = el.value; answered++; }
+      });
+      if (answered < 5) { alert('Please answer at least 5 questions before submitting.'); return; }
+
+      // Update local surveyData
+      totalResponses++;
+      QUESTIONS.forEach(q => {
+        if (!surveyData[q.key]) surveyData[q.key] = {};
+        const val = answers[q.key];
+        if (val) surveyData[q.key][val] = (surveyData[q.key][val] || 0) + 1;
+      });
+
+      // Post to API
+      fetch('/api/panel-survey', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(answers) }).catch(()=>{});
+
+      document.getElementById('surveyForm').style.display = 'none';
+      document.getElementById('surveySuccess').style.display = 'block';
+      renderLiveResults();
+    }
+
+    function renderLiveResults() {
+      const container = document.getElementById('liveResults');
+      document.getElementById('responseCount').textContent = totalResponses + ' response' + (totalResponses !== 1 ? 's' : '') + ' so far';
+      if (totalResponses === 0) { container.innerHTML = '<p class="q-empty">Results will appear here as responses come in.</p>'; return; }
+      container.innerHTML = QUESTIONS.map(q => {
+        const counts = surveyData[q.key] || {};
+        const total = Object.values(counts).reduce((a,b)=>a+b,0);
+        const bars = q.opts.map(opt => {
+          const c = counts[opt] || 0;
+          const pct = total ? Math.round(c/total*100) : 0;
+          return `<div class="rq-row">
+            <span class="rq-opt-label">${opt}</span>
+            <div class="rq-bar-track"><div class="rq-bar-fill" style="width:${pct}%"></div></div>
+            <span class="rq-pct">${pct}%</span>
+          </div>`;
+        }).join('');
+        return `<div class="rq"><div class="rq-label">${q.label}</div><div class="rq-bar-wrap">${bars}</div></div>`;
+      }).join('');
+    }
+
+    // Poll for survey results from server every 5s
+    async function pollSurvey() {
+      try {
+        const res = await fetch('/api/panel-survey');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.total !== undefined) totalResponses = data.total;
+          if (data.results) surveyData = data.results;
+          renderLiveResults();
+        }
+      } catch(e) {}
+      setTimeout(pollSurvey, 5000);
+    }
+
+    // ── Questions ──
+    let knownQIds = new Set();
 
     async function submitQ() {
       const q = document.getElementById('qText').value.trim();
       const name = document.getElementById('qName').value.trim();
       const anon = document.getElementById('qAnon').checked;
       if (!q) { alert('Please enter a question.'); return; }
-      const btn = document.querySelector('.q-btn');
-      btn.textContent = 'Submitting...'; btn.disabled = true;
+      const btn = document.querySelector('.qform-box .q-btn') || document.querySelector('[onclick="submitQ()"]');
+      if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
       try {
         const res = await fetch('/api/panel-questions', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, name:name||'Anonymous', anonymous:anon})});
         if (!res.ok) throw new Error();
-        document.getElementById('qForm').style.display = 'none';
+        document.getElementById('qText').value = '';
+        document.getElementById('qName').value = '';
         document.getElementById('qSuccess').style.display = 'block';
+        setTimeout(()=>{ document.getElementById('qSuccess').style.display='none'; }, 3000);
+        pollQuestions();
       } catch(e) {
         alert('Something went wrong. Please try again.');
-        btn.textContent = 'Submit Question →'; btn.disabled = false;
       }
+      if (btn) { btn.textContent = 'Submit Question →'; btn.disabled = false; }
     }
+
+    async function pollQuestions() {
+      try {
+        const res = await fetch('/api/panel-questions');
+        if (res.ok) {
+          const data = await res.json();
+          const feed = document.getElementById('qFeed');
+          const questions = Array.isArray(data) ? data : (data.questions || []);
+          if (questions.length === 0) { feed.innerHTML = '<p class="q-empty">No questions yet. Be the first!</p>'; }
+          else {
+            feed.innerHTML = questions.slice().reverse().map(item => `
+              <div class="q-card">
+                <div class="q-card-text">${item.question || item}</div>
+                <div class="q-card-meta">${item.anonymous ? 'Anonymous' : (item.name || 'Anonymous')}</div>
+              </div>`).join('');
+          }
+        }
+      } catch(e) {}
+      setTimeout(pollQuestions, 4000);
+    }
+
   </script>
   <script src="nav.js"></script>
 </body>
