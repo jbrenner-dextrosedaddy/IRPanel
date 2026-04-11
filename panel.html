@@ -476,11 +476,11 @@
 
   <!-- ── SECTION 2: MENTORSHIP SURVEY ── -->
   <div class="page-section" id="sec-survey">
+  <p class="section-label">Mentorship Survey.</p>
+  <div style="position:relative;z-index:1;max-width:1100px;margin:0 auto 0.5rem;padding:0 1.25rem;font-size:15px;color:var(--muted);">Quick 2-min survey. Results appear live on the right.</div>
     <div class="survey-wrap">
       <!-- Left: form -->
       <div class="survey-form-box">
-        <h2>Mentorship Survey</h2>
-        <p class="sub">Quick 2-min survey. Results appear live on the right.</p>
         <div id="surveyForm">
           <div class="sq">
             <span class="sq-label"><span class="sq-num">1</span>What year are you in training?</span>
@@ -599,11 +599,11 @@
 
   <!-- ── SECTION 3: SUBMIT A QUESTION ── -->
   <div class="page-section" id="sec-questions">
+  <p class="section-label">Submit a Question.</p>
+  <div style="position:relative;z-index:1;max-width:1100px;margin:0 auto 0.5rem;padding:0 1.25rem;font-size:15px;color:var(--muted);">Ask our panelists anything. You can stay anonymous.</div>
     <div class="questions-wrap">
       <!-- Left: form -->
       <div class="qform-box">
-        <h2>Submit a Question</h2>
-        <p class="sub">Ask our panelists anything. You can stay anonymous.</p>
         <input type="text" class="q-name" id="qName" placeholder="Your name (optional)" style="margin-bottom:8px;">
         <textarea class="q-text" id="qText" placeholder="Type your question here…" style="margin-bottom:8px;"></textarea>
         <label class="q-anon" style="margin-bottom:12px;"><input type="checkbox" id="qAnon" onchange="document.getElementById('qName').disabled=this.checked; if(this.checked) document.getElementById('qName').value=''"> Submit anonymously</label>
@@ -616,7 +616,7 @@
           <h2>Questions</h2>
           <span class="live-badge"><span class="live-dot"></span>Live</span>
         </div>
-        <p class="sub">Newest first. Updates every 4 seconds.</p>
+        <p class="sub">Newest first.</p>
         <div class="q-feed" id="qFeed">
           <p class="q-empty">No questions yet. Be the first!</p>
         </div>
@@ -730,24 +730,24 @@
     function handleBrittanyClick(card) {
       hideOverlay('brittany');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) { startPlaying('brittany'); } else { stopAll(false); }
+      if (card.classList.contains('flipped') && nowPlaying !== 'brittany') { startPlaying('brittany'); }
     }
 
     // Music card flips
     function handleKiremaClick(card) {
       hideOverlay('kirema');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) { startPlaying('kirema'); } else { stopAll(false); }
+      if (card.classList.contains('flipped') && nowPlaying !== 'kirema') { startPlaying('kirema'); }
     }
     function handleNeilClick(card) {
       hideOverlay('neil');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) { startPlaying('neil'); } else { stopAll(false); }
+      if (card.classList.contains('flipped') && nowPlaying !== 'neil') { startPlaying('neil'); }
     }
     function handleGreggClick(card) {
       hideOverlay('gregg');
       card.classList.toggle('flipped');
-      if (card.classList.contains('flipped')) { startPlaying('gregg'); } else { stopAll(false); }
+      if (card.classList.contains('flipped') && nowPlaying !== 'gregg') { startPlaying('gregg'); }
     }
 
     // ── Section tabs ──
