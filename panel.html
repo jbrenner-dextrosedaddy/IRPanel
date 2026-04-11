@@ -610,7 +610,7 @@
         <input type="text" class="q-name" id="qName" placeholder="Your name (optional)" style="margin-bottom:8px;">
         <textarea class="q-text" id="qText" placeholder="Type your question here…" style="margin-bottom:8px;"></textarea>
         <label class="q-anon" style="margin-bottom:12px;"><input type="checkbox" id="qAnon" onchange="document.getElementById('qName').disabled=this.checked; if(this.checked) document.getElementById('qName').value=''"> Submit anonymously</label>
-        <button class="q-btn" onclick="submitQ()" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:var(--sf);font-size:14px;font-weight:600;cursor:pointer;">Submit Question →</button>
+        <button id="submitQBtn" onclick="submitQ()" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:var(--sf);font-size:14px;font-weight:600;cursor:pointer;">Submit Question →</button>
         <div class="q-success" id="qSuccess" style="display:none;text-align:center;padding:1rem 0;font-size:14px;color:var(--g2);font-weight:500;">✓ Your question has been submitted!</div>
       </div>
       <!-- Right: live feed -->
@@ -838,20 +838,6 @@
       }).join('');
     }
 
-    // Poll for survey results from server every 5s
-    async function pollSurvey() {
-      try {
-        const res = await fetch('/api/panel-survey');
-        if (res.ok) {
-          const data = await res.json();
-          if (data.total !== undefined) totalResponses = data.total;
-          if (data.results) surveyData = data.results;
-          renderLiveResults();
-        }
-      } catch(e) {}
-      setTimeout(pollSurvey, 5000);
-    }
-
     // ── Questions ──
     let localQuestions = []; // questions submitted this session shown immediately
 
@@ -874,28 +860,44 @@
       const name = document.getElementById('qName').value.trim();
       const anon = document.getElementById('qAnon').checked;
       if (!q) { alert('Please enter a question.'); return; }
-      const btn = document.querySelector('[onclick="submitQ()"]');
+      const btn = document.getElementById('submitQBtn');
       if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
-      try {
-        const res = await fetch('/api/panel-questions', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, name:name||'Anonymous', anonymous:anon})});
-        if (!res.ok) throw new Error();
-        // Add to local list immediately so it shows up right away
-        localQuestions.push({ question: q, name: anon ? 'Anonymous' : (name || 'Anonymous'), anonymous: anon });
-        renderQFeed(localQuestions);
-        document.getElementById('qText').value = '';
-        document.getElementById('qName').value = '';
-        document.getElementById('qSuccess').style.display = 'block';
-        setTimeout(()=>{ document.getElementById('qSuccess').style.display='none'; }, 3000);
-      } catch(e) {
-        alert('Something went wrong. Please try again.');
-      }
+
+      // Always show locally immediately — don't wait for server
+      localQuestions.push({ question: q, name: anon ? 'Anonymous' : (name || 'Anonymous'), anonymous: anon });
+      renderQFeed(localQuestions);
+      document.getElementById('qText').value = '';
+      document.getElementById('qName').value = '';
+      document.getElementById('qSuccess').style.display = 'block';
+      setTimeout(()=>{ document.getElementById('qSuccess').style.display='none'; }, 3000);
+
+      // Fire off to API in background — don't block on success/failure
+      fetch('/api/panel-questions', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, name:anon?'Anonymous':(name||'Anonymous'), anonymous:anon})}).catch(()=>{});
+
       if (btn) { btn.textContent = 'Submit Question →'; btn.disabled = false; }
     }
 
+    // Poll survey — uses /api/panel-survey GET (safe-fails if not deployed yet)
+    async function pollSurvey() {
+      try {
+        const res = await fetch('/api/panel-survey');
+        const ct = res.headers.get('content-type') || '';
+        if (res.ok && ct.includes('application/json')) {
+          const data = await res.json();
+          if (data.total !== undefined) totalResponses = data.total;
+          if (data.results) surveyData = data.results;
+        }
+      } catch(e) {}
+      renderLiveResults();
+      setTimeout(pollSurvey, 5000);
+    }
+
+    // Poll questions — uses /api/panel-questions GET (safe-fails if not deployed yet)
     async function pollQuestions() {
       try {
         const res = await fetch('/api/panel-questions');
-        if (res.ok) {
+        const ct = res.headers.get('content-type') || '';
+        if (res.ok && ct.includes('application/json')) {
           const data = await res.json();
           const records = Array.isArray(data) ? data : (data.questions || []);
           if (records.length > 0) {
