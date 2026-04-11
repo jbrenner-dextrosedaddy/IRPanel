@@ -170,21 +170,24 @@
     .survey-submit{width:100%;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:10px;font-family:var(--sf);font-size:14px;font-weight:600;cursor:pointer;margin-top:0.5rem;transition:opacity 0.15s,transform 0.1s;}
     .survey-submit:hover{opacity:0.9;transform:translateY(-1px);}
     .survey-success{display:none;text-align:center;padding:2rem;font-size:15px;color:var(--g2);font-weight:600;}
-    /* Live results panel */
-    .results-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);position:sticky;top:130px;}
+    /* Live results — improved */
+    .results-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);position:sticky;top:130px;max-height:85vh;overflow-y:auto;}
     .results-box h2{font-size:18px;font-weight:600;color:#1d1d1f;margin-bottom:0.25rem;}
-    .results-box .sub{font-size:13px;color:#6e6e73;margin-bottom:1.5rem;}
-    .live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#e53e3e;letter-spacing:0.05em;text-transform:uppercase;}
-    .live-dot{width:7px;height:7px;background:#e53e3e;border-radius:50%;animation:livePulse 1.4s ease-in-out infinite;}
-    @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
-    .rq{margin-bottom:1.25rem;}
-    .rq-label{font-size:12px;font-weight:600;color:#1d1d1f;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-    .rq-bar-wrap{display:flex;flex-direction:column;gap:4px;}
-    .rq-row{display:flex;align-items:center;gap:8px;font-size:11px;color:#6e6e73;}
-    .rq-bar-track{flex:1;height:8px;background:#f0f0f5;border-radius:100px;overflow:hidden;}
-    .rq-bar-fill{height:100%;background:linear-gradient(90deg,var(--g2),var(--teal));border-radius:100px;transition:width 0.6s ease;}
-    .rq-pct{font-size:11px;font-weight:600;color:var(--g2);width:28px;text-align:right;}
-    .rq-opt-label{width:130px;flex-shrink:0;line-height:1.3;}
+    .results-box .sub{font-size:13px;color:#6e6e73;margin-bottom:1.25rem;}
+    .live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#c0392b;letter-spacing:0.04em;text-transform:uppercase;}
+    .live-dot{width:7px;height:7px;background:#c0392b;border-radius:50%;animation:livePulse 1.4s ease-in-out infinite;}
+    @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+    .rq{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+    .rq:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+    .rq-label{font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+    .rq-label span{font-size:11px;font-weight:400;color:#6e6e73;}
+    .rq-bar-wrap{display:flex;flex-direction:column;gap:6px;}
+    .rq-row{display:flex;align-items:center;gap:8px;}
+    .rq-bar-track{flex:1;height:6px;background:#f0f0f5;border-radius:100px;overflow:hidden;}
+    .rq-bar-fill{height:100%;background:linear-gradient(90deg,var(--g2),var(--teal));border-radius:100px;transition:width 0.7s cubic-bezier(0.4,0,0.2,1);}
+    .rq-bar-fill.top{background:linear-gradient(90deg,#1b5e40,var(--g2));}
+    .rq-pct{font-size:11px;font-weight:600;color:var(--g2);width:30px;text-align:right;flex-shrink:0;}
+    .rq-opt-label{width:120px;flex-shrink:0;font-size:11px;color:#555;line-height:1.35;}
     /* Questions section */
     .questions-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
     .qform-box{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(10,60,30,0.06);}
@@ -541,12 +544,12 @@
             </div>
           </div>
           <div class="sq">
-            <span class="sq-label"><span class="sq-num">7</span>Most useful platform for professional networking in IR?</span>
+            <span class="sq-label"><span class="sq-num">7</span>Most useful platform(s) for professional networking in IR? <em style="font-weight:400;color:#6e6e73;">(select all that apply)</em></span>
             <div class="sq-opts" data-q="q7">
-              <label class="sq-opt"><input type="radio" name="q7" value="Instagram"> Instagram</label>
-              <label class="sq-opt"><input type="radio" name="q7" value="X/Twitter"> X (Twitter)</label>
-              <label class="sq-opt"><input type="radio" name="q7" value="LinkedIn"> LinkedIn</label>
-              <label class="sq-opt"><input type="radio" name="q7" value="None"> None / I don't use social media for this</label>
+              <label class="sq-opt"><input type="checkbox" name="q7" value="Instagram"> Instagram</label>
+              <label class="sq-opt"><input type="checkbox" name="q7" value="X/Twitter"> X (Twitter)</label>
+              <label class="sq-opt"><input type="checkbox" name="q7" value="LinkedIn"> LinkedIn</label>
+              <label class="sq-opt"><input type="checkbox" name="q7" value="None"> None / I don't use social media for this</label>
             </div>
           </div>
           <div class="sq">
@@ -778,11 +781,17 @@
     ];
 
     function submitSurvey() {
+      // Collect answers — Q7 is multi-select (checkboxes)
       const answers = {};
       let answered = 0;
       QUESTIONS.forEach(q => {
-        const el = document.querySelector(`input[name="${q.key}"]:checked`);
-        if (el) { answers[q.key] = el.value; answered++; }
+        if (q.key === 'q7') {
+          const checked = [...document.querySelectorAll(`input[name="q7"]:checked`)].map(el => el.value);
+          if (checked.length) { answers[q.key] = checked.join(', '); answered++; }
+        } else {
+          const el = document.querySelector(`input[name="${q.key}"]:checked`);
+          if (el) { answers[q.key] = el.value; answered++; }
+        }
       });
       if (answered < 5) { alert('Please answer at least 5 questions before submitting.'); return; }
 
@@ -791,10 +800,14 @@
       QUESTIONS.forEach(q => {
         if (!surveyData[q.key]) surveyData[q.key] = {};
         const val = answers[q.key];
-        if (val) surveyData[q.key][val] = (surveyData[q.key][val] || 0) + 1;
+        if (!val) return;
+        if (q.key === 'q7') {
+          val.split(', ').forEach(v => { surveyData[q.key][v] = (surveyData[q.key][v] || 0) + 1; });
+        } else {
+          surveyData[q.key][val] = (surveyData[q.key][val] || 0) + 1;
+        }
       });
 
-      // Post to API
       fetch('/api/panel-survey', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(answers) }).catch(()=>{});
 
       document.getElementById('surveyForm').style.display = 'none';
@@ -806,19 +819,22 @@
       const container = document.getElementById('liveResults');
       document.getElementById('responseCount').textContent = totalResponses + ' response' + (totalResponses !== 1 ? 's' : '') + ' so far';
       if (totalResponses === 0) { container.innerHTML = '<p class="q-empty">Results will appear here as responses come in.</p>'; return; }
+      const maxPct = (counts, total) => total ? Math.max(...Object.values(counts).map(c => Math.round(c/total*100))) : 0;
       container.innerHTML = QUESTIONS.map(q => {
         const counts = surveyData[q.key] || {};
         const total = Object.values(counts).reduce((a,b)=>a+b,0);
+        const topPct = maxPct(counts, total);
         const bars = q.opts.map(opt => {
           const c = counts[opt] || 0;
           const pct = total ? Math.round(c/total*100) : 0;
+          const isTop = pct === topPct && pct > 0;
           return `<div class="rq-row">
             <span class="rq-opt-label">${opt}</span>
-            <div class="rq-bar-track"><div class="rq-bar-fill" style="width:${pct}%"></div></div>
-            <span class="rq-pct">${pct}%</span>
+            <div class="rq-bar-track"><div class="rq-bar-fill${isTop?' top':''}" style="width:${pct}%"></div></div>
+            <span class="rq-pct" style="${isTop?'color:#1b5e40;font-weight:700':''}">${pct}%</span>
           </div>`;
         }).join('');
-        return `<div class="rq"><div class="rq-label">${q.label}</div><div class="rq-bar-wrap">${bars}</div></div>`;
+        return `<div class="rq"><div class="rq-label">${q.label} <span>${total} answer${total!==1?'s':''}</span></div><div class="rq-bar-wrap">${bars}</div></div>`;
       }).join('');
     }
 
@@ -837,23 +853,39 @@
     }
 
     // ── Questions ──
-    let knownQIds = new Set();
+    let localQuestions = []; // questions submitted this session shown immediately
+
+    function renderQFeed(questions) {
+      const feed = document.getElementById('qFeed');
+      if (!feed) return;
+      if (!questions || questions.length === 0) {
+        feed.innerHTML = '<p class="q-empty">No questions yet. Be the first!</p>'; return;
+      }
+      feed.innerHTML = questions.slice().reverse().map(item => {
+        const text = item.question || item.text || item;
+        const isAnon = item.anonymous === true || item.name === 'Anonymous';
+        const who = isAnon ? '<span style="display:inline-block;background:#f0f0f5;color:#888;font-size:10px;padding:1px 7px;border-radius:4px;">Anonymous</span>' : (item.name || '');
+        return `<div class="q-card"><div class="q-card-text">${text}</div><div class="q-card-meta">${who}</div></div>`;
+      }).join('');
+    }
 
     async function submitQ() {
       const q = document.getElementById('qText').value.trim();
       const name = document.getElementById('qName').value.trim();
       const anon = document.getElementById('qAnon').checked;
       if (!q) { alert('Please enter a question.'); return; }
-      const btn = document.querySelector('.qform-box .q-btn') || document.querySelector('[onclick="submitQ()"]');
+      const btn = document.querySelector('[onclick="submitQ()"]');
       if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
       try {
         const res = await fetch('/api/panel-questions', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, name:name||'Anonymous', anonymous:anon})});
         if (!res.ok) throw new Error();
+        // Add to local list immediately so it shows up right away
+        localQuestions.push({ question: q, name: anon ? 'Anonymous' : (name || 'Anonymous'), anonymous: anon });
+        renderQFeed(localQuestions);
         document.getElementById('qText').value = '';
         document.getElementById('qName').value = '';
         document.getElementById('qSuccess').style.display = 'block';
         setTimeout(()=>{ document.getElementById('qSuccess').style.display='none'; }, 3000);
-        pollQuestions();
       } catch(e) {
         alert('Something went wrong. Please try again.');
       }
@@ -865,18 +897,21 @@
         const res = await fetch('/api/panel-questions');
         if (res.ok) {
           const data = await res.json();
-          const feed = document.getElementById('qFeed');
-          const questions = Array.isArray(data) ? data : (data.questions || []);
-          if (questions.length === 0) { feed.innerHTML = '<p class="q-empty">No questions yet. Be the first!</p>'; }
-          else {
-            feed.innerHTML = questions.slice().reverse().map(item => `
-              <div class="q-card">
-                <div class="q-card-text">${item.question || item}</div>
-                <div class="q-card-meta">${item.anonymous ? 'Anonymous' : (item.name || 'Anonymous')}</div>
-              </div>`).join('');
+          const questions = Array.isArray(data) ? data : (data.questions || data.records || []);
+          if (questions.length > 0) {
+            // Merge server questions with any local ones not yet returned
+            const serverTexts = new Set(questions.map(q => q.question || q.text || q));
+            const extras = localQuestions.filter(q => !serverTexts.has(q.question));
+            renderQFeed([...questions, ...extras]);
+          } else {
+            renderQFeed(localQuestions);
           }
+        } else {
+          renderQFeed(localQuestions);
         }
-      } catch(e) {}
+      } catch(e) {
+        renderQFeed(localQuestions);
+      }
       setTimeout(pollQuestions, 4000);
     }
 
