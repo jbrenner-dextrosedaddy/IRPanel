@@ -897,12 +897,11 @@
         const res = await fetch('/api/panel-questions');
         if (res.ok) {
           const data = await res.json();
-          const questions = Array.isArray(data) ? data : (data.questions || data.records || []);
-          if (questions.length > 0) {
-            // Merge server questions with any local ones not yet returned
-            const serverTexts = new Set(questions.map(q => q.question || q.text || q));
+          const records = Array.isArray(data) ? data : (data.questions || []);
+          if (records.length > 0) {
+            const serverTexts = new Set(records.map(q => q.question));
             const extras = localQuestions.filter(q => !serverTexts.has(q.question));
-            renderQFeed([...questions, ...extras]);
+            renderQFeed([...records, ...extras]);
           } else {
             renderQFeed(localQuestions);
           }
