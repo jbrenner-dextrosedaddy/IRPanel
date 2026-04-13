@@ -742,13 +742,13 @@
   <section class="page-section" id="presentation" style="background:#fff;">
     <h2 class="section-title">Presentation</h2>
 
-    <!-- PDF card -->
     <div style="background:#fff;border:1px solid #dde8e0;border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(10,60,30,.07);max-width:960px;">
-      <!-- card header -->
+
+      <!-- header bar -->
       <div style="padding:14px 20px;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;gap:10px;background:#f0faf4;">
-        <span style="background:#2e4a7a;color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:980px;font-family:inherit;letter-spacing:.03em;flex-shrink:0;">SIR 2026</span>
+        <span style="background:#2e4a7a;color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:980px;font-family:inherit;flex-shrink:0;">SIR 2026</span>
         <span style="font-size:14px;font-weight:600;color:#1d1d1f;font-family:inherit;flex:1;">Top 11 Nerve Blocks Every Interventional Radiologist Should Know</span>
-        <a href="presentation/NBLOCKS.pdf" download="NBLOCKS.pdf" title="Download PDF"
+        <a href="presentation/NBLOCKS.pdf" download="NBLOCKS.pdf"
            style="border:none;background:none;cursor:pointer;padding:4px 10px;border-radius:6px;
                   color:#2e7d56;font-size:13px;font-family:inherit;display:flex;align-items:center;
                   gap:4px;text-decoration:none;flex-shrink:0;"
@@ -757,19 +757,73 @@
           Download PDF
         </a>
       </div>
-      <!-- PDF embed -->
-      <div style="background:#f8f8f8;">
-        <iframe src="presentation/NBLOCKS.pdf"
-                style="width:100%;height:700px;border:none;display:block;"
-                title="Top 11 Nerve Blocks Every Interventional Radiologist Should Know">
-          <p style="padding:2rem;text-align:center;color:#666;">
-            Your browser doesn't support inline PDFs.
-            <a href="presentation/NBLOCKS.pdf" style="color:#2e7d56;">Download the PDF</a> to view it.
-          </p>
-        </iframe>
-      </div>
-    </div>
 
+      <!-- slide viewer -->
+      <div style="background:#1a1a2e;position:relative;">
+
+        <!-- slide display area -->
+        <div style="position:relative;width:100%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:24px 60px;box-sizing:border-box;min-height:540px;">
+
+          <!-- prev arrow -->
+          <button id="pres-prev" onclick="presNav(-1)"
+                  style="position:absolute;left:12px;top:50%;transform:translateY(-50%);
+                         width:40px;height:40px;border-radius:50%;border:none;
+                         background:rgba(255,255,255,0.15);color:#fff;font-size:20px;
+                         cursor:pointer;display:flex;align-items:center;justify-content:center;
+                         transition:background .15s;z-index:2;"
+                  onmouseover="this.style.background='rgba(255,255,255,0.3)'"
+                  onmouseout="this.style.background='rgba(255,255,255,0.15)'">&#8249;</button>
+
+          <!-- slide image -->
+          <img id="pres-slide" src="" alt="Slide 1"
+               style="max-width:100%;max-height:500px;border-radius:8px;
+                      box-shadow:0 8px 40px rgba(0,0,0,0.5);display:block;
+                      object-fit:contain;">
+
+          <!-- next arrow -->
+          <button id="pres-next" onclick="presNav(1)"
+                  style="position:absolute;right:12px;top:50%;transform:translateY(-50%);
+                         width:40px;height:40px;border-radius:50%;border:none;
+                         background:rgba(255,255,255,0.15);color:#fff;font-size:20px;
+                         cursor:pointer;display:flex;align-items:center;justify-content:center;
+                         transition:background .15s;z-index:2;"
+                  onmouseover="this.style.background='rgba(255,255,255,0.3)'"
+                  onmouseout="this.style.background='rgba(255,255,255,0.15)'">&#8250;</button>
+        </div>
+
+        <!-- bottom bar: slide counter + dot indicators -->
+        <div style="padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:16px;background:rgba(0,0,0,0.3);">
+          <!-- prev text button -->
+          <button onclick="presNav(-1)"
+                  style="border:none;background:none;color:rgba(255,255,255,0.6);
+                         font-size:13px;font-family:inherit;cursor:pointer;padding:4px 8px;">
+            ← Prev
+          </button>
+
+          <!-- slide counter -->
+          <span id="pres-counter"
+                style="color:#fff;font-size:14px;font-weight:500;font-family:inherit;
+                       background:rgba(255,255,255,0.1);padding:4px 14px;border-radius:980px;
+                       min-width:80px;text-align:center;">
+            1 / 18
+          </span>
+
+          <!-- next text button -->
+          <button onclick="presNav(1)"
+                  style="border:none;background:none;color:rgba(255,255,255,0.6);
+                         font-size:13px;font-family:inherit;cursor:pointer;padding:4px 8px;">
+            Next →
+          </button>
+        </div>
+      </div>
+
+      <!-- thumbnail strip -->
+      <div id="pres-thumbs"
+           style="display:flex;gap:8px;overflow-x:auto;padding:12px 16px;
+                  background:#f8f8f8;border-top:1px solid #e8e8e8;scrollbar-width:thin;">
+      </div>
+
+    </div>
   </section>
 
   <!-- ══ SECTION 4: QUICK CARDS ══ -->
@@ -1258,6 +1312,80 @@
       rail.addEventListener('mousedown', function(e){ dn=true; sx=e.pageX; sl=rail.scrollLeft; rail.style.cursor='grabbing'; });
       document.addEventListener('mouseup', function(){ dn=false; var r=document.getElementById('qc-rail'); if(r) r.style.cursor='grab'; });
       rail.addEventListener('mousemove', function(e){ if(!dn) return; e.preventDefault(); rail.scrollLeft=sl-(e.pageX-sx); });
+    })();
+
+
+    // Presentation slide viewer
+    (function() {
+      var TOTAL = 18;
+      var cur = 1;
+
+      function slideSrc(n) {
+        return 'presentation/NBLOCKS.pdf#page=' + n;
+      }
+
+      // Use pdf.js via CDN to render slides as images
+      // Instead, use object/embed with page param — but most reliable is just iframe per page
+      // Best cross-browser: render each slide as an <img> using a PDF-to-image proxy isn't
+      // available without a server. So we use an iframe that loads only that page.
+
+      var slideEl   = document.getElementById('pres-slide');
+      var counterEl = document.getElementById('pres-counter');
+      var thumbsEl  = document.getElementById('pres-thumbs');
+
+      // Replace img with iframe approach for PDF pages
+      if (slideEl) {
+        // Replace the img element with an iframe
+        var iframe = document.createElement('iframe');
+        iframe.id = 'pres-iframe';
+        iframe.style.cssText = 'width:100%;height:500px;border:none;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.5);display:block;background:#fff;';
+        slideEl.parentNode.replaceChild(iframe, slideEl);
+
+        function goTo(n) {
+          if (n < 1) n = TOTAL;
+          if (n > TOTAL) n = 1;
+          cur = n;
+          iframe.src = 'presentation/NBLOCKS.pdf#page=' + n + '&view=FitH&toolbar=0&navpanes=0&scrollbar=0';
+          if (counterEl) counterEl.textContent = n + ' / ' + TOTAL;
+          // update thumb highlights
+          document.querySelectorAll('.pres-thumb').forEach(function(t, i) {
+            t.style.outline = (i + 1 === cur) ? '3px solid #2e7d56' : '2px solid transparent';
+            t.style.opacity = (i + 1 === cur) ? '1' : '0.6';
+          });
+        }
+
+        // Build thumbnail strip — just numbered buttons since we can't render PDF pages as images without a server
+        if (thumbsEl) {
+          for (var i = 1; i <= TOTAL; i++) {
+            (function(num) {
+              var btn = document.createElement('button');
+              btn.className = 'pres-thumb';
+              btn.textContent = num;
+              btn.style.cssText = 'flex-shrink:0;width:36px;height:36px;border-radius:8px;border:2px solid transparent;' +
+                'background:#e8e8ed;color:#1d1d1f;font-size:13px;font-weight:500;cursor:pointer;' +
+                'font-family:inherit;transition:all .15s;' +
+                (num === 1 ? 'outline:3px solid #2e7d56;opacity:1;' : 'opacity:0.6;');
+              btn.onclick = function() { goTo(num); };
+              thumbsEl.appendChild(btn);
+            })(i);
+          }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+          var section = document.getElementById('presentation');
+          if (!section) return;
+          var rect = section.getBoundingClientRect();
+          if (rect.top > window.innerHeight || rect.bottom < 0) return;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(cur + 1);
+          if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(cur - 1);
+        });
+
+        window.presNav = function(dir) { goTo(cur + dir); };
+
+        // Init
+        goTo(1);
+      }
     })();
 
     // Collapsible (Introduction section)
