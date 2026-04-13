@@ -129,6 +129,83 @@
 
     @media(max-width:720px){.sheet-grid{grid-template-columns:1fr;}.page-section{padding:2.5rem 1.5rem;}.hero{padding:2.5rem 1.5rem 1.5rem;}.section-nav{padding:0 1rem;}}
     @media(max-width:640px){nav{padding:0 1rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:0.75rem;gap:2px;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.nav-hamburger{display:flex;}}
+
+    /* ── MOBILE RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 0 1rem; }
+      .nav-logo { font-size: 15px; }
+
+      /* Hero */
+      .hero { padding: 1.5rem 1rem 1rem; }
+      .hero h1 { font-size: 2rem; }
+      .hero-eyebrow { font-size: 10px; }
+
+      /* Section nav */
+      .section-nav { padding: 0 1rem; }
+      .section-nav a { padding: 12px 14px; font-size: 13px; }
+
+      /* Page sections */
+      .page-section { padding: 2rem 1rem; }
+
+      /* Collapsible tables */
+      .steps-table, .block-table { font-size: 13px; }
+      .steps-table th, .steps-table td,
+      .block-table th, .block-table td { padding: 8px 10px; }
+
+      /* Sheet cards — full width on mobile, no peek */
+      .sheets-carousel-wrap,
+      #nb-rail,
+      #qc-rail {
+        margin: 0 -1rem !important;
+      }
+
+      /* Cards take full width on mobile */
+      #nbcard-block-master, #nbcard-clinical, #nbcard-anatomy,
+      #nbcard-cpt, #nbcard-coverage, #nbcard-documentation, #nbcard-references,
+      #qc-overview, #qc-cpb, #qc-shpb, #qc-gip, #qc-stg, #qc-icn {
+        flex: 0 0 92% !important;
+        min-width: 92% !important;
+        max-width: 92% !important;
+      }
+
+      /* Pill tab bars */
+      #nb-tabs, #qc-tabs {
+        gap: 2px !important;
+      }
+      #nb-tabs button, #qc-tabs button {
+        font-size: 12px !important;
+        padding: 6px 12px !important;
+      }
+
+      /* Table max height less on mobile */
+      .carousel-slide .sheet-content,
+      [id^="nbcard-"] > div,
+      [id^="qc-"] > div:last-child {
+        max-height: 400px !important;
+      }
+
+      /* Presentation iframe */
+      #pres-iframe { height: 280px !important; }
+
+      /* Section title */
+      .section-title { font-size: 1.4rem; }
+
+      /* Sheet grid (intro section) */
+      .sheet-grid { grid-template-columns: 1fr !important; }
+
+      /* Footer */
+      .footer-inner { flex-direction: column; gap: 0.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.75rem; }
+      .page-section { padding: 1.5rem 0.875rem; }
+      nav { height: 56px; }
+      .section-nav-wrap { top: 56px; }
+    }
+    /* ── END MOBILE ─────────────────────────────────────────────── */
+
   </style>
 </head>
 <body>
