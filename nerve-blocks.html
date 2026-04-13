@@ -741,11 +741,35 @@
   <!-- ══ SECTION 2: PRESENTATION ══ -->
   <section class="page-section" id="presentation" style="background:#fff;">
     <h2 class="section-title">Presentation</h2>
-    <div class="placeholder">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      <h3>Presentation Coming Soon</h3>
-      <p>Slides and educational content will appear here.</p>
+
+    <!-- PDF card -->
+    <div style="background:#fff;border:1px solid #dde8e0;border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(10,60,30,.07);max-width:960px;">
+      <!-- card header -->
+      <div style="padding:14px 20px;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;gap:10px;background:#f0faf4;">
+        <span style="background:#2e4a7a;color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:980px;font-family:inherit;letter-spacing:.03em;flex-shrink:0;">SIR 2026</span>
+        <span style="font-size:14px;font-weight:600;color:#1d1d1f;font-family:inherit;flex:1;">Top 11 Nerve Blocks Every Interventional Radiologist Should Know</span>
+        <a href="presentation/NBLOCKS.pdf" download="NBLOCKS.pdf" title="Download PDF"
+           style="border:none;background:none;cursor:pointer;padding:4px 10px;border-radius:6px;
+                  color:#2e7d56;font-size:13px;font-family:inherit;display:flex;align-items:center;
+                  gap:4px;text-decoration:none;flex-shrink:0;"
+           onmouseover="this.style.background='#e0f0e8'" onmouseout="this.style.background='none'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <!-- PDF embed -->
+      <div style="background:#f8f8f8;">
+        <iframe src="presentation/NBLOCKS.pdf"
+                style="width:100%;height:700px;border:none;display:block;"
+                title="Top 11 Nerve Blocks Every Interventional Radiologist Should Know">
+          <p style="padding:2rem;text-align:center;color:#666;">
+            Your browser doesn't support inline PDFs.
+            <a href="presentation/NBLOCKS.pdf" style="color:#2e7d56;">Download the PDF</a> to view it.
+          </p>
+        </iframe>
+      </div>
     </div>
+
   </section>
 
   <!-- ══ SECTION 4: QUICK CARDS ══ -->
